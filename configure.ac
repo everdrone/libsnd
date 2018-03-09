@@ -5,7 +5,7 @@ AC_PREREQ([2.69])
 AC_INIT([libsnd], [0.0.1], [https://github.com/everdrone/libsnd])
 AC_CONFIG_SRCDIR([snd.h])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([foreign])
 
 # Remember externally set CFLAGS
 EXTERNAL_CFLAGS="$CFLAGS"
