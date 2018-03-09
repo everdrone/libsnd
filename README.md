@@ -1,3 +1,5 @@
-# <img alt="libsnd" src="assets/libsnd-banner_2.png" height="100" />
+<h1 align="center">
+<img src="assets/libsnd.png" />
+</h1>
 
-# libsnd
+> Digital Signal Processing Library and Audio Toolbox for the Modern Synthesist.
