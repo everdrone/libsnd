@@ -11,4 +11,6 @@ libsnd_a_SOURCES = \
   denormal.hh \
   denormal.cc \
   sine.hh \
-  sine.cc
+  sine.cc \
+  envelope.hh \
+  envelope.cc
