@@ -6,7 +6,8 @@
 > Digital Signal Processing Library and Audio Toolbox for the Modern Synthesist.
 
 ## Attention
-This library is still under development!  
+This library is still under development!
+
 Currently looking for contributors / enthusiasts, if you have an idea, found a bug or have and amazing new feature you want to add, feel free to clone, edit and push.
 
 ## Install
@@ -56,6 +57,7 @@ g++ main.cc -o a.out -lsnd
   - [ ] Bilinear
   - [ ] Biquad
   - [ ] Modular / Multiband
+  - [ ] Comb
 - [ ] Waveshaper
 - [x] Envelope Generator
 - [ ] Envelope Follower
@@ -68,12 +70,18 @@ g++ main.cc -o a.out -lsnd
   - [ ] Square
   - [ ] Random
   - [ ] Perlin
-- [ ] Delay
-  - [ ] Interpolated
-  - [ ] Non-Interpolated
-- [ ] Reverb
-  - [ ] Spring
-  - [ ] Convolution
+- [ ] Effects
+  - [ ] Delay
+    - [ ] Interpolated
+    - [ ] Non-Interpolated
+  - [ ] Reverb
+    - [ ] Spring
+    - [ ] Convolution
+  - [ ] Flanger
+  - [ ] Phaser
+  - [ ] Chorus
+  - [ ] Stereo Panner
+  - [ ] Ring Modulator
 - [ ] Utilities
   - [ ] LR to MS
   - [ ] MS to LR
