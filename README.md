@@ -7,7 +7,7 @@
 
 ## Install
 
-Download the latest [stable release]() and `cd` into it.
+Download the latest [stable release](https://github.com/everdrone/libsnd/releases/tag/v0.0.4) and `cd` into it.
 
 ```bash
 ./configure
