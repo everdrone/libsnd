@@ -150,8 +150,8 @@ class EnvelopeGenerator {
   ~EnvelopeGenerator() {}
 
   fp_t tick() {
-    // this->stageSwitch();
-    // this->phaseProcess();
+    this->_stageSwitch();
+    this->_phaseProcess();
     phase -= phaseDec;
     state = (state * a) - b;
     state = denormalCancel<fp_t>(state);
@@ -170,6 +170,106 @@ class EnvelopeGenerator {
   uint8_t nStages;
   uint8_t phaseDec;
   uint8_t currentIdx;
+
+  void _stageSwitch() {
+    if (feed.forceStart) {
+      _computeData(feed.forceStart, true, currentIdx);
+      feed.forceStart = false;
+    }
+  }
+
+  void _phaseProcess() {
+    if (phase <= 0) {
+      if (stage[currentIdx].param.nextIdx >= nStages) {
+        _computeData(true, false, stage[currentIdx].param.nextIdx);
+        a = 1.0f;
+        b = 0.0f;
+        phaseDec = 0;
+      } else {
+        currentIdx = stage[currentIdx].param.nextIdx;
+        _computeData(true, false, currentIdx);
+      }
+    }
+  }
+
+  void _computeData(bool stageTrigger, bool paramTrigger, uint8_t index) {
+    if (2 == stage[index].param.mode)
+      phaseDec = 0;
+    else
+      phaseDec = 1;
+
+    // calculate time
+    N = std::round(stage[index].param.time * SRR / speedFactor);
+    N = N < 1 ? 1 : N;
+    float t_scaled = static_cast<float>(N) / SRR;
+    // write read alternation
+    int tau = 0;
+    if (stageTrigger) {
+      phase = N;
+      Time = t_scaled;
+    }
+    phase = (t_scaled / Time) * phase;
+    Time = t_scaled;
+    if (stageTrigger || paramTrigger) {
+      tau = phase;
+      t_scaled = Time;
+    }
+
+    // calculate alpha
+    float alpha;
+    // infinite mode
+    if (2 == stage[index].param.mode)
+      alpha = std::log2(0.1);
+    else {
+      alpha = stage[index].param.bend < -10.0f ? -10.0f :
+              (stage[index].param.bend > 10.0f ? 10.0f : stage[index].param.bend);
+    }
+
+    // calculate y0
+    float y0_1 = stage[index].param.start;
+    // jump mode
+    if (1 == stage[index].param.mode) {
+      if (stageTrigger)
+        state = y0_1;
+      else
+        y0_1 = state;
+    } else {
+      if (stageTrigger || (paramTrigger && (!stageTrigger)))
+        y0_1 = state;
+    }
+
+    // calculate y1
+    float y1_1 = stage[index].param.stop;
+    // const mode
+    if (3 == stage[index].param.mode)
+      y1_1 = y0_1;
+
+    // calculate a
+    float delta = std::sqrt(2.0f * 1.110223024625157E-016);
+    float temp = (alpha / t_scaled) / SRR;
+    float a_1;
+    if (std::abs(temp) < delta) {
+      a_1 = std::log(2.0) * temp;
+      a = a_1 + 1.0f;
+    } else {
+      a = std::pow(2.0f, temp);
+      a_1 = a - 1.0f;
+    }
+
+    // calculate b
+    temp *= static_cast<float>(tau);
+    if (std::abs(temp) < delta)
+      b = (y1_1 - y0_1) / static_cast<float>(tau);
+    else {
+      if (2 == stage[index].param.mode)
+        b = y1_1 * (-a_1);
+      else {
+        temp = std::pow(2.0f, temp);
+        b = (a_1 / (temp - 1.0f)) * (y1_1 - (y0_1 * temp));
+      }
+    }
+  }
+
 };
 
 }; // !snd

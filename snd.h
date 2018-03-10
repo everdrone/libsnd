@@ -80,6 +80,87 @@ class Sine {
   void _sineApprox7odd();
 };
 
+/**
+ * envelope
+ */
+template <typename fp_t>
+struct EnvelopeFeed {
+  bool forceStart;
+  fp_t start;
+  fp_t stop;
+  fp_t time;
+  fp_t bend;
+  uint8_t Idx;
+  EnvelopeFeed();
+};
+
+template <typename fp_t>
+struct EnvelopeStorage {
+  fp_t start;
+  fp_t stop;
+  fp_t time;
+  fp_t bend;
+  uint8_t nextIdx;
+  uint8_t mode;
+  EnvelopeStorage();
+};
+
+template <class fp_t>
+class EnvelopeStage {
+ public:
+  struct EnvelopeStorage<fp_t> param;
+  EnvelopeStage();
+  ~EnvelopeStage();
+
+  void init(struct EnvelopeFeed<fp_t>* feedPtr, uint8_t* current);
+  void setIndex(uint8_t index);
+  void setNextIndex(uint8_t nextIndex);
+  void resetNextIndex();
+  uint8_t getIndex();
+  void inject(uint8_t mode, fp_t y0, fp_t y1, fp_t time, fp_t bend);
+  void trigger();
+
+ private:
+  bool triggerRequest;
+  uint8_t Idx;
+  uint8_t* currentIdxPtr;
+  struct EnvelopeFeed<fp_t>* feedPtr;
+  struct EnvelopeFeed<fp_t> previous;
+};
+
+template <class fp_t>
+class EnvelopeGenerator {
+ public:
+ public:
+  EnvelopeStage<fp_t>* stage;
+  fp_t speedFactor;
+
+  EnvelopeGenerator(fp_t sampleRate, uint8_t nStages);
+  ~EnvelopeGenerator();
+  fp_t tick();
+
+ private:
+  struct EnvelopeFeed<fp_t> feed;
+  fp_t SRR;
+  fp_t Time;
+  fp_t a;
+  fp_t b;
+  fp_t state;
+  uint32_t N;
+  uint32_t phase;
+  uint8_t nStages;
+  uint8_t phaseDec;
+  uint8_t currentIdx;
+
+  void _stageSwitch();
+  void _phaseProcess();
+  void _computeData(bool stageTrigger, bool paramTrigger, uint8_t index);
+};
+
+/**
+ * end envelope
+ */
+
 }; // !snd
 
 
