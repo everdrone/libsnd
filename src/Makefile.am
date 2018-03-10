@@ -10,6 +10,8 @@ AM_CXXFLAGS = -Wall -std=c++11
 libsnd_a_SOURCES = \
   denormal.hh \
   denormal.cc \
+  interpolation.hh \
+  interpolation.cc \
   sine.hh \
   sine.cc \
   envelope.hh \

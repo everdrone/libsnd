@@ -150,8 +150,8 @@ class EnvelopeGenerator {
   ~EnvelopeGenerator() {}
 
   fp_t tick() {
-    this->stageSwitch();
-    this->phaseProcess();
+    // this->stageSwitch();
+    // this->phaseProcess();
     phase -= phaseDec;
     state = (state * a) - b;
     state = denormalCancel<fp_t>(state);
