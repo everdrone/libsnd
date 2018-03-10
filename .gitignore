@@ -38,3 +38,4 @@
 .vscode
 bintest
 clean.sh
+release.sh
