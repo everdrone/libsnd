@@ -42,3 +42,44 @@ int main(int argc, char* argv[]) {
 ```bash
 g++ main.cc -o a.out -lsnd
 ```
+
+## Features
+- [ ] Oscillators
+  - [ ] Anti Aliased
+    - [X] Sine
+    - [ ] Triangle
+    - [ ] Sawtooth
+    - [ ] Square
+    - [ ] Spectral (Sine Bank)
+- [ ] Filters
+  - [ ] Zero Delay Feedback
+  - [ ] Bilinear
+  - [ ] Biquad
+  - [ ] Modular / Multiband
+- [ ] Waveshaper
+- [x] Envelope Generator
+- [ ] Envelope Follower
+- [x] Interpolation
+- [x] Denormal canceling
+- [ ] LFOs
+  - [ ] Sine
+  - [ ] Triangle
+  - [ ] Sawtooth
+  - [ ] Square
+  - [ ] Random
+  - [ ] Perlin
+- [ ] Delay
+  - [ ] Interpolated
+  - [ ] Non-Interpolated
+- [ ] Reverb
+  - [ ] Spring
+  - [ ] Convolution
+- [ ] Utilities
+  - [ ] LR to MS
+  - [ ] MS to LR
+  - [ ] Pitch (MIDI) to Frequency (Hz)
+  - [ ] Frequency (Hz) to Pitch (MIDI)
+  - [ ] Amplitude Factor to dB
+  - [ ] dB to Amplitude Factor
+  - [ ] Linear to Exponential
+  - [ ] Linear to Logarithmic
