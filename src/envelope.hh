@@ -158,6 +158,11 @@ class EnvelopeGenerator {
     return state;
   }
 
+  void triggerStage(uint8_t index) {
+    this->_setCurrentIdx(index);
+    stage[index].trigger();
+  }
+
  private:
   struct EnvelopeFeed<fp_t> feed;
   fp_t SRR;
@@ -170,6 +175,10 @@ class EnvelopeGenerator {
   uint8_t nStages;
   uint8_t phaseDec;
   uint8_t currentIdx;
+
+  void _setCurrentIdx(uint8_t index) {
+    this->currentIdx = index;
+  }
 
   void _stageSwitch() {
     if (feed.forceStart) {

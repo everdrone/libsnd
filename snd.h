@@ -138,6 +138,7 @@ class EnvelopeGenerator {
   EnvelopeGenerator(fp_t sampleRate, uint8_t nStages);
   ~EnvelopeGenerator();
   fp_t tick();
+  void triggerStage(uint8_t index);
 
  private:
   struct EnvelopeFeed<fp_t> feed;
@@ -152,6 +153,7 @@ class EnvelopeGenerator {
   uint8_t phaseDec;
   uint8_t currentIdx;
 
+  void _setCurrentIdx(uint8_t index);
   void _stageSwitch();
   void _phaseProcess();
   void _computeData(bool stageTrigger, bool paramTrigger, uint8_t index);
