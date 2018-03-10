@@ -5,9 +5,13 @@
 
 > Digital Signal Processing Library and Audio Toolbox for the Modern Synthesist.
 
+## Attention
+This library is still under development!  
+Currently looking for contributors / enthusiasts, if you have an idea, found a bug or have and amazing new feature you want to add, feel free to clone, edit and push.
+
 ## Install
 
-Download the latest [stable release](https://github.com/everdrone/libsnd/releases/tag/v0.0.4) and `cd` into it.
+Download the latest [release](https://github.com/everdrone/libsnd/releases/tag/v0.0.4) and `cd` into it.
 
 ```bash
 ./configure
@@ -25,8 +29,6 @@ make install
 #define SAMPLE_RATE 44100
 
 int main(int argc, char* argv[]) {
-  std::cout << "libsnd " << snd::snd_version << std::endl;  
-
   snd::Sine<float> s(SAMPLE_RATE);
   s.setFrequency(440);
   
