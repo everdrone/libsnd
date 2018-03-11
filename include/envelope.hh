@@ -2,6 +2,7 @@
 #define ENVELOPE_H_
 
 #include <cstdlib>
+#include <cstdint>
 #include "denormal.hh"
 
 namespace snd {

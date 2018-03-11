@@ -39,3 +39,6 @@
 bintest
 clean.sh
 release.sh
+
+# CMake build folder
+build
