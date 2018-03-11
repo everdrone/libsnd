@@ -1,11 +1,3 @@
-/**
- * @file snd.hh
- * @brief main header file
- *
- * This is the long description everyone was waiting for.
- * Ipsum tempor eu Lorem cillum.In quis pariatur aute commodo cupidatat cupidatat ea cillum minim minim et.
- */
-
 #ifndef SND_H_
 #define SND_H_
 
@@ -18,9 +10,9 @@ template<typename fp_t>
 fp_t denormalCancel(fp_t x);
 
 /**
- * interpolation
+ * @defgroup Interpolation
+ * @{
  */
-
 template <typename fp_t> fp_t interp_linear(fp_t x, fp_t y0, fp_t y1);
 template <typename fp_t> fp_t interp_bSpline(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_bSpline_z(fp_t x, fp_t y[4]);
@@ -56,9 +48,13 @@ template <typename fp_t> fp_t interp_4p4o16x(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_4p4o32x(fp_t x, fp_t y[4]);
 
 /**
- * end interpolation
+ * @} !Interpolation
  */
 
+/**
+ * @defgroup Oscillators
+ * @{
+ */
 template <class fp_t>
 class Sine {
  public:
@@ -79,9 +75,13 @@ class Sine {
   void _triangularDriver();
   void _sineApprox7odd();
 };
+/**
+ * @} !Oscillators
+ */
 
 /**
- * envelope
+ * @defgroup Envelope
+ * @{
  */
 template <typename fp_t>
 struct EnvelopeFeed {
@@ -160,7 +160,7 @@ class EnvelopeGenerator {
 };
 
 /**
- * end envelope
+ * @} !Envelope
  */
 
 }; // !snd

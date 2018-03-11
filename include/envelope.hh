@@ -103,7 +103,6 @@ class EnvelopeStage {
   }
 
   void trigger() {
-    // TODO: add trigger function to remove 'bool trigger' from injection function
     triggerRequest = true;
     if (triggerRequest && feedPtr->forceStart) {
       feedPtr->forceStart = true;
