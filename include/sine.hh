@@ -2,8 +2,7 @@
 #define SINE_H_
 
 #include <cmath>
-
-#include <iostream>
+#include "approx.hh"
 
 namespace snd {
 
@@ -20,7 +19,7 @@ class Sine {
     this->_interpolateFrequency();
     latency = out;
     this->_triangularDriver();
-    this->_sineApprox7odd();
+    this->_sineApprox();
     phase -= increment;
     fp_t sign = -1;
     if (0.5 < std::abs(phase)) {
@@ -63,10 +62,8 @@ class Sine {
     sineStep = 0.5 - sineStep;
   }
 
-  void _sineApprox7odd() {
-    fp_t x2 = sineStep * sineStep;
-    out = sineStep * (3.141592653589793 + (x2 * (-5.166512943349853 + (x2 *
-                                           (2.535656174488765 + (-0.540347434104161 * x2))))));
+  void _sineApprox() {
+    out = sineApprox7odd<fp_t>(sineStep);
   }
 };
 

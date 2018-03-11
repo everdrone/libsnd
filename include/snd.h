@@ -9,6 +9,9 @@ bool isDenormal(fp_t x);
 template<typename fp_t>
 fp_t denormalCancel(fp_t x);
 
+template<typename fp_t>
+fp_t sineApprox7odd(fp_t x);
+
 /**
  * @defgroup Interpolation
  * @{
