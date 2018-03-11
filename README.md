@@ -6,11 +6,13 @@
 > Digital Signal Processing Library and Audio Toolbox for the Modern Synthesist.
 
 ## Attention
+
 This library is still under development!
 
 Currently looking for contributors / enthusiasts, if you have an idea, found a bug or have and amazing new feature you want to add, feel free to clone, edit and push.
 
 ## Building
+
 ```bash
 git clone https://github.com/everdrone/libsnd.git
 cd libsnd
@@ -33,22 +35,24 @@ make install
 int main(int argc, char* argv[]) {
   snd::Sine<float> s(SAMPLE_RATE);
   s.setFrequency(440);
-  
+
   for (int i = 0; i < 512; i++) {
     std::cout << s.tick(); << std::endl;
   }
-  
+
   return 0;
 }
 ```
+
 ```bash
 g++ main.cc -o a.out -lsnd
 ```
 
 ## Features
+
 - [ ] Oscillators
   - [ ] Anti Aliased
-    - [X] Sine
+    - [x] Sine
     - [ ] Triangle
     - [ ] Sawtooth
     - [ ] Square
@@ -65,7 +69,7 @@ g++ main.cc -o a.out -lsnd
 - [x] Interpolation
 - [x] Denormal canceling
 - [ ] LFOs
-  - [ ] Sine
+  - [x] Sine
   - [ ] Triangle
   - [ ] Sawtooth
   - [ ] Square
