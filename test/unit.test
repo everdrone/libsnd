@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-./test.out -d yes -r compact -s
