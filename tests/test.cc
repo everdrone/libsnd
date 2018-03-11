@@ -21,7 +21,7 @@ TEST_CASE("sine oscillator") {
 TEST_CASE("lfo") {
   SECTION("instantiate") {
     snd::LFO::Sine<double> ls(SRR);
-    snd::LFO::Sine<double> lsp*;
+    snd::LFO::Sine<double>* lsp;
     lsp = new snd::LFO::Sine<double>(SRR);
     REQUIRE(sizeof(ls) == sizeof(snd::LFO::Sine<double>));
   }
