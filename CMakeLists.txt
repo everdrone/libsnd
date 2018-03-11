@@ -29,6 +29,7 @@ add_library(
 	source/denormal.cc
 	source/envelope.cc
 	source/interpolation.cc
+	source/lfo.cc
 	source/sine.cc
 )
 

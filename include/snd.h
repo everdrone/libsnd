@@ -13,6 +13,47 @@ template<typename fp_t>
 fp_t sineApprox7odd(fp_t x);
 
 /**
+ * @defgroup LFO
+ * @{
+ */
+namespace LFO {
+
+template<class fp_t>
+class LFOBase {
+ public:
+  LFOBase(fp_t sampleRate);
+  ~LFOBase();
+
+  void setFrequency(fp_t frequency);
+  void setPhase(fp_t phase);
+  fp_t tick();
+ private:
+  fp_t SR;
+  fp_t state;
+  fp_t freq;
+};
+
+template<class fp_t>
+class Sine {
+ public:
+  Sine(fp_t sampleRate);
+  ~Sine();
+
+  void setFrequency(fp_t frequency);
+  void setPhase(fp_t phase);
+  fp_t tick();
+
+ private:
+  fp_t out;
+  LFOBase<fp_t>* phaseDriver;
+};
+
+}; // !LFO
+/**
+ * @} !LFO
+ */
+
+/**
  * @defgroup Interpolation
  * @{
  */
