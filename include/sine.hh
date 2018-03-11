@@ -42,10 +42,9 @@ class Sine {
     phase = phs;
   }
 
+ private:
   fp_t SR;
   fp_t frequency;
-
- private:
   fp_t phase, frequencyState, increment, latency, sineStep, out;
 
   void _interpolateFrequency() {

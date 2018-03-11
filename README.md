@@ -7,7 +7,7 @@
 
 ## Attention
 
-This library is still under development!
+This library is still under development! (see the [examples](#examples))
 
 Currently looking for contributors / enthusiasts, if you have an idea, found a bug or have and amazing new feature you want to add, feel free to clone, edit and push.
 
@@ -96,3 +96,7 @@ g++ main.cc -o a.out -lsnd
   * [ ] dB to Amplitude Factor
   * [ ] Linear to Exponential
   * [ ] Linear to Logarithmic
+
+## Examples
+- [sine.cc](/examples/sine.cc)  
+  Requires RtAudio, compile with `g++ sine.cc -o sine.out -lrtaudio -lsnd`

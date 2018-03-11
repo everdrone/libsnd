@@ -125,9 +125,9 @@ class Sine {
   void setFrequency(fp_t frequency);
   void setPhase(fp_t phase);
 
-  fp_t SR, frequency;
 
  private:
+  fp_t SR, frequency;
   fp_t phase, frequencyState, increment, latency, sineStep, out;
 
   void _interpolateFrequency();

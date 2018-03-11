@@ -44,8 +44,8 @@ class Sine {
  public:
   Sine(fp_t sampleRate) {
     phaseDriver = new LFOBase<fp_t>(sampleRate);
-  }
-  ~Sine() {}
+  };
+  ~Sine() {};
 
   void setFrequency(fp_t frequency) {
     phaseDriver->setFrequency(frequency);
@@ -74,8 +74,8 @@ class Triangle {
  public:
   Triangle(fp_t sampleRate) {
     phaseDriver = new LFOBase<fp_t>(sampleRate);
-  }
-  ~Triangle() {}
+  };
+  ~Triangle() {};
 
   void setFrequency(fp_t frequency) {
     phaseDriver->setFrequency(frequency);
