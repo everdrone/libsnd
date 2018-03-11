@@ -50,49 +50,49 @@ g++ main.cc -o a.out -lsnd
 
 ## Features
 
-- [ ] Oscillators
-  - [ ] Anti Aliased
-    - [x] Sine
-    - [ ] Triangle
-    - [ ] Sawtooth
-    - [ ] Square
-    - [ ] Spectral (Sine Bank)
-- [ ] Filters
-  - [ ] Zero Delay Feedback
-  - [ ] Bilinear
-  - [ ] Biquad
-  - [ ] Modular / Multiband
-  - [ ] Comb
-- [ ] Waveshaper
-- [x] Envelope Generator
-- [ ] Envelope Follower
-- [x] Interpolation
-- [x] Denormal canceling
-- [ ] LFOs
-  - [x] Sine
-  - [ ] Triangle
-  - [ ] Sawtooth
-  - [ ] Square
-  - [ ] Random
-  - [ ] Perlin
-- [ ] Effects
-  - [ ] Delay
-    - [ ] Interpolated
-    - [ ] Non-Interpolated
-  - [ ] Reverb
-    - [ ] Spring
-    - [ ] Convolution
-  - [ ] Flanger
-  - [ ] Phaser
-  - [ ] Chorus
-  - [ ] Stereo Panner
-  - [ ] Ring Modulator
-- [ ] Utilities
-  - [ ] LR to MS
-  - [ ] MS to LR
-  - [ ] Pitch (MIDI) to Frequency (Hz)
-  - [ ] Frequency (Hz) to Pitch (MIDI)
-  - [ ] Amplitude Factor to dB
-  - [ ] dB to Amplitude Factor
-  - [ ] Linear to Exponential
-  - [ ] Linear to Logarithmic
+* [ ] Oscillators
+  * [ ] Anti Aliased
+    * [x] Sine
+    * [ ] Triangle
+    * [ ] Sawtooth
+    * [ ] Square
+    * [ ] Spectral (Sine Bank)
+* [ ] Filters
+  * [ ] Zero Delay Feedback
+  * [ ] Bilinear
+  * [ ] Biquad
+  * [ ] Modular / Multiband
+  * [ ] Comb
+* [ ] Waveshaper
+* [x] Envelope Generator
+* [ ] Envelope Follower
+* [x] Interpolation
+* [x] Denormal canceling
+* [ ] LFOs
+  * [x] Sine
+  * [x] Triangle
+  * [ ] Sawtooth
+  * [ ] Square
+  * [ ] Random
+  * [ ] Perlin
+* [ ] Effects
+  * [ ] Delay
+    * [ ] Interpolated
+    * [ ] Non-Interpolated
+  * [ ] Reverb
+    * [ ] Spring
+    * [ ] Convolution
+  * [ ] Flanger
+  * [ ] Phaser
+  * [ ] Chorus
+  * [ ] Stereo Panner
+  * [ ] Ring Modulator
+* [ ] Utilities
+  * [ ] LR to MS
+  * [ ] MS to LR
+  * [ ] Pitch (MIDI) to Frequency (Hz)
+  * [ ] Frequency (Hz) to Pitch (MIDI)
+  * [ ] Amplitude Factor to dB
+  * [ ] dB to Amplitude Factor
+  * [ ] Linear to Exponential
+  * [ ] Linear to Logarithmic
