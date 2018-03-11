@@ -48,6 +48,21 @@ class Sine {
   LFOBase<fp_t>* phaseDriver;
 };
 
+template<class fp_t>
+class Triangle {
+ public:
+  Triangle(fp_t sampleRate);
+  ~Triangle();
+
+  void setFrequency(fp_t frequency);
+  void setPhase(fp_t phase);
+  fp_t tick();
+
+ private:
+  fp_t out;
+  LFOBase<fp_t>* phaseDriver;
+};
+
 }; // !LFO
 /**
  * @} !LFO

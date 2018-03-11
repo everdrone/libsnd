@@ -69,6 +69,35 @@ class Sine {
   LFOBase<fp_t>* phaseDriver;
 };
 
+template <class fp_t>
+class Triangle {
+ public:
+  Triangle(fp_t sampleRate) {
+    phaseDriver = new LFOBase<fp_t>(sampleRate);
+  }
+  ~Triangle() {}
+
+  void setFrequency(fp_t frequency) {
+    phaseDriver->setFrequency(frequency);
+  }
+
+  void setPhase(fp_t phase) {
+    phaseDriver->setPhase(phase);
+  }
+
+  fp_t tick() {
+    out = phaseDriver->tick();
+    // triangular driver
+    out = std::abs(out) * 4.0;
+    return out - 1.0;
+  }
+
+ private:
+  fp_t out;
+  LFOBase<fp_t>* phaseDriver;
+};
+
+
 }; // !LFO
 }; // !snd
 
