@@ -1,7 +1,3 @@
-/**
- * g++ sine.cc -o sine.out -lrtaudio -lsnd
- */
-
 #include <RtAudio.h>
 #include <snd.h>
 #include <iostream>
