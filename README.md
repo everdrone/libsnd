@@ -11,10 +11,9 @@ This library is still under development!
 Currently looking for contributors / enthusiasts, if you have an idea, found a bug or have and amazing new feature you want to add, feel free to clone, edit and push.
 
 ## Building
-
-Download the latest [release](https://github.com/everdrone/libsnd/releases/tag/v0.0.4) and `cd` into it.
-
 ```bash
+git clone https://github.com/everdrone/libsnd.git
+cd libsnd
 mkdir build
 cd build
 cmake ..
