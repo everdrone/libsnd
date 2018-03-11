@@ -37,6 +37,19 @@ target_include_directories(
 	include
 )
 
+set(LIBSND_VERSION_MAJOR 0)
+set(LIBSND_VERSION_MINOR 0)
+set(LIBSND_VERSION_PATCH 5)
+set(LIBSND_VERSION_STRING "${LIBSND_VERSION_MAJOR}.${LIBSND_VERSION_MINOR}.${LIBSND_VERSION_PATCH}")
+
+set_target_properties(
+	libsnd PROPERTIES
+	VERSION ${LIBSND_VERSION_STRING}
+)
+
+install(TARGETS libsnd DESTINATION lib)
+
+install(FILES include/snd.h DESTINATION include)
 
 ### Tests
 enable_testing()

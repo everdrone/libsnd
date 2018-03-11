@@ -14,10 +14,11 @@ Currently looking for contributors / enthusiasts, if you have an idea, found a b
 ```bash
 git clone https://github.com/everdrone/libsnd.git
 cd libsnd
+
 mkdir build
 cd build
 cmake ..
-make
+make install
 ```
 
 ## Usage
