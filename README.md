@@ -71,9 +71,10 @@ g++ main.cc -o a.out -lsnd
 * [x] Denormal canceling
 * [ ] LFOs
   * [x] Sine
+  * [x] Parabolic
   * [x] Triangle
-  * [ ] Sawtooth
-  * [ ] Square
+  * [x] Sawtooth
+  * [x] Square
   * [ ] Random
   * [ ] Perlin
 * [ ] Effects

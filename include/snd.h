@@ -49,6 +49,21 @@ class Sine {
 };
 
 template<class fp_t>
+class Parabolic {
+ public:
+  Parabolic(fp_t sampleRate);
+  ~Parabolic();
+
+  void setFrequency(fp_t frequency);
+  void setPhase(fp_t phase);
+  fp_t tick();
+
+ private:
+  fp_t out;
+  LFOBase<fp_t>* phaseDriver;
+};
+
+template<class fp_t>
 class Triangle {
  public:
   Triangle(fp_t sampleRate);
@@ -60,6 +75,38 @@ class Triangle {
 
  private:
   fp_t out;
+  LFOBase<fp_t>* phaseDriver;
+};
+
+template<class fp_t>
+class Sawtooth {
+ public:
+  Sawtooth(fp_t sampleRate);
+  ~Sawtooth();
+
+  void setFrequency(fp_t frequency);
+  void setPhase(fp_t phase);
+  fp_t tick();
+
+ private:
+  fp_t out;
+  LFOBase<fp_t>* phaseDriver;
+};
+
+template<class fp_t>
+class Square {
+ public:
+  Square(fp_t sampleRate);
+  ~Square();
+
+  void setFrequency(fp_t frequency);
+  void setPhase(fp_t phase);
+  void setPulseWidth(fp_t pw);
+  fp_t tick();
+
+ private:
+  fp_t out;
+  fp_t pulseWidth;
   LFOBase<fp_t>* phaseDriver;
 };
 
