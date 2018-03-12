@@ -7,8 +7,8 @@
 * LFO (Aliased)
   * [Sine](/lfo/sine.md)
   * [Triangle](/lfo/triangle.md)
-* [Interpolation](/interpolation.md)
-* [Denormal Canceling](/denormal.md)
+* [Interpolation](https://github.com/everdrone/libsnd/blob/master/docs/interpolation.md)
+* [Denormal Canceling](https://github.com/everdrone/libsnd/blob/master/docs/denormal.md)
 * [Envelope Generator](/envelope/README.md)
 
 > Under development
