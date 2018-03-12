@@ -45,3 +45,6 @@ build
 
 # doxygen
 doc
+
+# stuff
+release-changelog.md
