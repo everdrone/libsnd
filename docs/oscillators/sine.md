@@ -2,8 +2,6 @@
 
 Anti Aliased sine wave oscillator
 
-> [Source](../include/sine.hh)
-
 ## Methods
 
 ### `void setFrequency(T frequency)`
