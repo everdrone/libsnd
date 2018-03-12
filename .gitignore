@@ -42,3 +42,6 @@ release.sh
 
 # CMake build folder
 build
+
+# doxygen
+doc

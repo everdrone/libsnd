@@ -19,7 +19,6 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
 	add_compile_options( -Wextra )
 endif()
 
-
 ### Targets
 
 add_library(
