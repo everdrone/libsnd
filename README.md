@@ -7,7 +7,8 @@
 
 ## Attention
 
-This library is still under development! (check out the [examples](/examples))
+This library is still under development!  
+Read the [docs](/docs) and check out the [examples](/examples).
 
 Currently looking for contributors / enthusiasts, if you have an idea, found a bug or have and amazing new feature you want to add, feel free to clone, edit and push.
 

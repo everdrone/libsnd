@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * Oscillators (Anti Aliased)
-  * [Sine](/oscillators/sine.md)
+  * [Sine](https://github.com/everdrone/libsnd/blob/master/docs/oscillators/sine.md)
 * LFO (Aliased)
   * [Sine](/lfo/sine.md)
   * [Triangle](/lfo/triangle.md)
