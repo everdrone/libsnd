@@ -25,6 +25,7 @@ add_library(
 	libsnd
 	STATIC
 	source/approx.cc
+	source/conversion.cc
 	source/denormal.cc
 	source/envelope.cc
 	source/interpolation.cc
@@ -40,7 +41,7 @@ target_include_directories(
 
 set(LIBSND_VERSION_MAJOR 0)
 set(LIBSND_VERSION_MINOR 0)
-set(LIBSND_VERSION_PATCH 7)
+set(LIBSND_VERSION_PATCH 8)
 set(LIBSND_VERSION_STRING "${LIBSND_VERSION_MAJOR}.${LIBSND_VERSION_MINOR}.${LIBSND_VERSION_PATCH}")
 
 set_target_properties(

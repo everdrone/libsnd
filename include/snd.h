@@ -12,6 +12,24 @@ fp_t denormalCancel(fp_t x);
 template<typename fp_t>
 fp_t sineApprox7odd(fp_t x);
 
+template <typename fp_t>
+fp_t tanRatApprox0Pi2(fp_t x);
+
+/**
+ * @defgroup Conversion
+ * @{
+ */
+template <typename fp_t> fp_t pitchToFrequency(fp_t pitch);
+template <typename fp_t> fp_t frequencyToPitch(fp_t frequency);
+template <typename fp_t> fp_t ampFactorToDeciBel(fp_t amp);
+template <typename fp_t> fp_t deciBelToAmpFactor(fp_t dB);
+template <typename fp_t> fp_t logTimeToSeconds(fp_t time);
+template <typename fp_t> fp_t scale(fp_t x, fp_t a, fp_t b, fp_t c, fp_t d);
+template <typename fp_t> fp_t BLTPrewarp(fp_t frequency, fp_t sampleRate);
+/**
+ * @} !Conversion
+ */
+
 /**
  * @defgroup LFO
  * @{
