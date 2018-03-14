@@ -23,6 +23,7 @@ add_library(
 	source/envelope.cc
 	source/interpolation.cc
 	source/lfo.cc
+	source/sawtooth.cc
 	source/sine.cc
 )
 

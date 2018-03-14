@@ -3,6 +3,51 @@
 
 namespace snd {
 
+/**
+ * @defgroup Utils
+ * @{
+ */
+const double polyBLEP[8] = {
+  0.49993,
+  -1.48783,
+  -0.11965,
+  3.917645,
+  -1.62547,
+  -5.7564,
+  6.7519,
+  -2.180115
+};
+
+const double polyBLAMP[9] = {
+  -0.824736,
+    3.99944,
+    -5.95132,
+    -0.31906666666666666666666666666667,
+    7.83529,
+    -2.600752,
+    -7.6752,
+    7.7164571428571428571428571428571,
+    -2.180115
+  };
+
+template <typename fp_t>
+inline fp_t computeBLEP(fp_t x);
+
+template <typename fp_t>
+inline fp_t computeBLAMP(fp_t x);
+
+class FlipFlop {
+ public:
+  FlipFlop();
+  FlipFlop(bool initialState);
+
+  bool tick();
+  bool state;
+};
+/**
+ * @}
+ */
+
 template<typename fp_t>
 bool isDenormal(fp_t x);
 
@@ -193,11 +238,35 @@ class Sine {
 
  private:
   fp_t SR, frequency;
-  fp_t phase, frequencyState, increment, latency, sineStep, out;
+  fp_t phase, frequencyState, increment,
+       latency, sineStep, out;
 
   void _interpolateFrequency();
   void _triangularDriver();
-  void _sineApprox7odd();
+};
+
+template <class fp_t>
+class Sawtooth {
+ public:
+  Sawtooth(fp_t sampleRate);
+  ~Sawtooth();
+
+  fp_t tick();
+
+  void setFrequency(fp_t frequency);
+  void setPhase(fp_t phase);
+
+ private:
+  fp_t SR, phase, frequency,
+       frequencyState, increment;
+  fp_t latency, out, phaseSign,
+       snc, phaseState;
+  FlipFlop flipFlop;
+  bool flipFlop_old;
+  int8_t state[2];
+  fp_t temp[2], sign[2], inject[2], blep;
+
+  void _interpolateFrequency();
 };
 /**
  * @} !Oscillators

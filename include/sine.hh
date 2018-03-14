@@ -11,7 +11,8 @@ class Sine {
  public:
   Sine(fp_t sampleRate) {
     SR = sampleRate;
-    phase = frequency = frequencyState = increment = sineStep = out = latency = 0;
+    phase = frequency = frequencyState = 0;
+    increment = sineStep = out = latency = 0;
   };
   ~Sine() {};
 
@@ -19,7 +20,7 @@ class Sine {
     this->_interpolateFrequency();
     latency = out;
     this->_triangularDriver();
-    this->_sineApprox();
+    out = sineApprox7odd<fp_t>(sineStep);
     phase -= increment;
     fp_t sign = -1;
     if (0.5 < std::abs(phase)) {
@@ -31,15 +32,15 @@ class Sine {
     return latency;
   }
 
-  void setFrequency(fp_t freq) {
-    this->frequency = freq;
+  void setFrequency(fp_t frequency) {
+    this->frequency = frequency;
   }
 
-  void setPhase(fp_t ph) {
-    fp_t phs = ph;
+  void setPhase(fp_t phase) {
+    fp_t phs = phase;
     phs -= 0.5;
     phs -= std::round(phs);
-    phase = phs;
+    this->phase = phs;
   }
 
  private:
@@ -59,10 +60,6 @@ class Sine {
     sineStep += sineStep;
     sineStep = std::abs(sineStep);
     sineStep = 0.5 - sineStep;
-  }
-
-  void _sineApprox() {
-    out = sineApprox7odd<fp_t>(sineStep);
   }
 };
 
