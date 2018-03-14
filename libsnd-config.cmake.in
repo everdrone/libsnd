@@ -1,0 +1,8 @@
+@PACKAGE_INIT@ 
+
+set_and_check(libsnd_INCLUDE_DIRS "@CMAKE_INSTALL_FULL_INCLUDEDIR@")
+set_and_check(libsnd_LIBRARY_DIRS "@CMAKE_INSTALL_FULL_LIBDIR@")
+
+message(STATUS "Found libsnd: ${libsnd_INCLUDE_DIRS} (found version ${libsnd_VERSION})")
+
+include("${CMAKE_CURRENT_LIST_DIR}/libsnd-targets.cmake"

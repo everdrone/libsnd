@@ -12,15 +12,6 @@ set( CMAKE_VERBOSE_MAKEFILE ON )
 
 option(BUILD_TESTS "Build unit tests" ON)
 
-### Optimizations
-if( MSVC )
-	add_compile_options( /W4 )
-elseif( CMAKE_COMPILER_IS_GNUCXX )
-	add_compile_options( -O2 )
-	add_compile_options( -Wall )
-	add_compile_options( -Wextra )
-endif()
-
 ### Targets
 
 add_library(
@@ -47,6 +38,24 @@ set_target_properties(
 	PREFIX ""
 	DEBUG_POSTFIX "d"
 )
+
+
+### Optimizations
+if ( MSVC )
+	target_compile_options(
+		libsnd
+		PUBLIC
+		/W4
+	)
+elseif( CMAKE_COMPILER_IS_GNUCXX )
+	target_compile_options(
+		libsnd
+		PUBLIC
+		-O2
+		-Wall
+		-Wextra
+	)
+endif()
 
 ### Tests
 
