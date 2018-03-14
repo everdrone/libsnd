@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 3.2.2 )
-project( libsnd )
+project( libsnd VERSION 0.0.8 )
 
 ### Standard
 set( CMAKE_CXX_STANDARD 14 )
@@ -10,14 +10,7 @@ set( CMAKE_CXX_EXTENSIONS OFF )
 set( CMAKE_COLOR_MAKEFILE ON )
 set( CMAKE_VERBOSE_MAKEFILE ON )
 
-### Optimizations
-if( MSVC )
-	add_compile_options( /W4 )
-elseif( CMAKE_COMPILER_IS_GNUCXX )
-	add_compile_options( -O2 )
-	add_compile_options( -Wall )
-	add_compile_options( -Wextra )
-endif()
+option(BUILD_TESTS "Build unit tests" ON)
 
 ### Targets
 
@@ -35,46 +28,98 @@ add_library(
 
 target_include_directories(
 	libsnd
-	PUBLIC
+	PRIVATE
 	include
 )
-
-set(LIBSND_VERSION_MAJOR 0)
-set(LIBSND_VERSION_MINOR 0)
-set(LIBSND_VERSION_PATCH 8)
-set(LIBSND_VERSION_STRING "${LIBSND_VERSION_MAJOR}.${LIBSND_VERSION_MINOR}.${LIBSND_VERSION_PATCH}")
 
 set_target_properties(
 	libsnd PROPERTIES
-	VERSION ${LIBSND_VERSION_STRING}
+	VERSION ${libsnd_VERSION}
 	PREFIX ""
+	DEBUG_POSTFIX "d"
 )
 
-install(TARGETS libsnd DESTINATION lib)
 
-install(FILES include/snd.h DESTINATION include)
+### Optimizations
+if ( MSVC )
+	target_compile_options(
+		libsnd
+		PUBLIC
+		/W4
+	)
+elseif( CMAKE_COMPILER_IS_GNUCXX )
+	target_compile_options(
+		libsnd
+		PUBLIC
+		-O2
+		-Wall
+		-Wextra
+	)
+endif()
 
 ### Tests
-enable_testing()
 
-add_executable(
-	Test
-	tests/test.cc
+if (BUILD_TESTS)
+	enable_testing()
+
+	add_executable(
+		Test
+		tests/test.cc
+	)
+
+	target_include_directories(
+		Test
+		PRIVATE
+		include
+	)
+
+	target_link_libraries(
+		Test
+		PRIVATE
+		libsnd
+	)
+
+	add_test(
+		NAME Test
+		COMMAND Test
+	)
+endif()
+
+include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
+
+install(
+	TARGETS libsnd 
+	EXPORT libsnd-targets 
+	ARCHIVE DESTINATION lib
 )
 
-target_include_directories(
-	Test
-	PRIVATE
-	include
+install(
+	FILES ${CMAKE_SOURCE_DIR}/include/snd.h
+	DESTINATION include
 )
 
-target_link_libraries(
-	Test
-	PRIVATE
-	libsnd
+set(CONF_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib/cmake/${CMAKE_PROJECT_NAME}")
+
+write_basic_package_version_file(
+	"${CMAKE_BINARY_DIR}/libsnd-config-version.cmake"
+	COMPATIBILITY AnyNewerVersion
 )
 
-add_test(
-	NAME Test
-	COMMAND Test
+configure_package_config_file(
+	"${CMAKE_SOURCE_DIR}/libsnd-config.cmake.in"
+	"${CMAKE_BINARY_DIR}/libsnd-config.cmake"
+	INSTALL_DESTINATION ${CONF_INSTALL_DIR}
+	PATH_VARS CMAKE_INSTALL_FULL_INCLUDEDIR CMAKE_INSTALL_FULL_LIBDIR
+)
+
+install(
+	EXPORT libsnd-targets
+	FILE libsnd-targets.cmake
+	DESTINATION ${CONF_INSTALL_DIR}
+)
+
+install(
+	FILES ${CMAKE_BINARY_DIR}/libsnd-config.cmake ${CMAKE_BINARY_DIR}/libsnd-config-version.cmake
+	DESTINATION ${CONF_INSTALL_DIR}
 )
