@@ -55,7 +55,7 @@ g++ main.cc -o a.out -lsnd
   * [ ] Anti Aliased
     * [x] Sine
     * [ ] Triangle
-    * [ ] Sawtooth
+    * [x] Sawtooth
     * [ ] Square
     * [ ] Spectral (Sine Bank)
 * [ ] Filters
@@ -92,9 +92,9 @@ g++ main.cc -o a.out -lsnd
 * [ ] Utilities
   * [ ] LR to MS
   * [ ] MS to LR
-  * [ ] Pitch (MIDI) to Frequency (Hz)
-  * [ ] Frequency (Hz) to Pitch (MIDI)
-  * [ ] Amplitude Factor to dB
-  * [ ] dB to Amplitude Factor
+  * [x] Pitch (MIDI) to Frequency (Hz)
+  * [x] Frequency (Hz) to Pitch (MIDI)
+  * [x] Amplitude Factor to dB
+  * [x] dB to Amplitude Factor
   * [ ] Linear to Exponential
   * [ ] Linear to Logarithmic
