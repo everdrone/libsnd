@@ -40,6 +40,23 @@ set_target_properties(
 	DEBUG_POSTFIX "d"
 )
 
+### dist
+set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${libsnd_VERSION})
+add_custom_target(dist
+		COMMAND tar -czf "${CMAKE_PROJECT_NAME}-${libsnd_VERSION}.tar.gz" source/
+			include/
+			docs/
+			examples/
+			tests/
+			.gitignore
+			CHANGELOG.md
+			CMakeLists.txt
+			Doxyfile
+			libsnd-config.cmake.in
+			LICENSE
+			README.md
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
 
 ### Optimizations
 if ( MSVC )
