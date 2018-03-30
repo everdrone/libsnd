@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
   s.setFrequency(440);
 
   for (int i = 0; i < 512; i++) {
-    std::cout << s.tick(); << std::endl;
+    std::cout << s.tick() << std::endl;
   }
 
   return 0;
