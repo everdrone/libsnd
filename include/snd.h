@@ -2,6 +2,7 @@
 #define SND_H_
 
 #include <memory>
+#include <cstdint>
 
 namespace snd {
 
