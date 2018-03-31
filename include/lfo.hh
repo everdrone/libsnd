@@ -2,6 +2,8 @@
 #define LFO_H_
 
 #include <cmath>
+#include <memory>
+
 #include "approx.hh"
 
 namespace snd {
@@ -44,7 +46,7 @@ template <class fp_t>
 class Sine {
  public:
   Sine(fp_t sampleRate) {
-    phaseDriver = new LFOBase<fp_t>(sampleRate);
+    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
   };
   ~Sine() {};
 
@@ -67,14 +69,14 @@ class Sine {
 
  private:
   fp_t out;
-  LFOBase<fp_t>* phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
 class Parabolic {
  public:
   Parabolic(fp_t sampleRate) {
-    phaseDriver = new LFOBase<fp_t>(sampleRate);
+    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
   };
   ~Parabolic() {};
 
@@ -94,14 +96,14 @@ class Parabolic {
 
  private:
   fp_t out;
-  LFOBase<fp_t>* phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
 class Triangle {
  public:
   Triangle(fp_t sampleRate) {
-    phaseDriver = new LFOBase<fp_t>(sampleRate);
+    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
   };
   ~Triangle() {};
 
@@ -122,14 +124,14 @@ class Triangle {
 
  private:
   fp_t out;
-  LFOBase<fp_t>* phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
 class Sawtooth {
  public:
   Sawtooth(fp_t sampleRate) {
-    phaseDriver = new LFOBase<fp_t>(sampleRate);
+    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
   }
   ~Sawtooth() {}
 
@@ -148,14 +150,14 @@ class Sawtooth {
 
  private:
   fp_t out;
-  LFOBase<fp_t>* phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
 class Square {
  public:
   Square(fp_t sampleRate) {
-    phaseDriver = new LFOBase<fp_t>(sampleRate);
+    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
     pulseWidth = 0.5;
   }
   ~Square() {}
@@ -183,7 +185,7 @@ class Square {
  private:
   fp_t out;
   fp_t pulseWidth;
-  LFOBase<fp_t>* phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 }; // !LFO
