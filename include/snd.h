@@ -1,6 +1,8 @@
 #ifndef SND_H_
 #define SND_H_
 
+#include <cstdint>
+
 namespace snd {
 
 /**
