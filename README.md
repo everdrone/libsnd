@@ -65,7 +65,10 @@ g++ main.cc -o a.out -lsnd
   * [ ] Modular / Multiband
   * [ ] Comb
 * [ ] Waveshaper
-* [x] Envelope Generator
+* [ ] Envelope Generators
+  * [x] Multistage Envelope Generator
+  * [ ] Classic Dual Stage (AD) Envelope Generator
+  * [ ] "Ducking" Curve Generator
 * [ ] Envelope Follower
 * [x] Interpolation
 * [x] Denormal canceling
@@ -89,6 +92,9 @@ g++ main.cc -o a.out -lsnd
   * [ ] Chorus
   * [ ] Stereo Panner
   * [ ] Ring Modulator
+  * [ ] Bit Crusher
+  * [ ] Compressor
+  * [ ] Driver/Saturator
 * [ ] Utilities
   * [ ] LR to MS
   * [ ] MS to LR
