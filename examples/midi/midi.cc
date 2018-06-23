@@ -63,7 +63,6 @@ int audioCallback(void *outputBuffer, void *inputBuffer,
                   double streamTime, RtAudioStreamStatus status, void *userData) {
   unsigned int i;
   double *buffer = reinterpret_cast<double *>(outputBuffer);
-  // snd::Sine<double> *osc = reinterpret_cast<snd::Sine<double>*>(userData);
   MiniSynth *synth = reinterpret_cast<MiniSynth *>(userData);
 
   if (status) std::cout << "Stream underflow detected!" << std::endl;
@@ -72,7 +71,6 @@ int audioCallback(void *outputBuffer, void *inputBuffer,
 
   for (i = 0; i < nBufferFrames; i++) {
     value = synth->tick();
-    // value = osc->tick() * 0.5;
     *buffer++ = value;
     // copy to channel 2
     *buffer++ = value;
@@ -89,11 +87,6 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message,
     synth->setPitch((int)message->at(1));
     synth->noteOn();
   }
-  // for (unsigned int i = 0; i < nBytes; i++) {
-  //   std::cout << "Byte " << i << " = " << (int)message->at(i) << ", ";
-  // }
-  // if (nBytes > 0)
-  //   std::cout << "stamp = " << deltatime << std::endl;
 }
 
 int main() {
@@ -123,9 +116,6 @@ int main() {
   unsigned int sampleRate = 44100;
   unsigned int bufferSize = 256;
 
-  snd::Sine<double> osc(sampleRate);
-  osc.setFrequency(440);
-
   MiniSynth synth(sampleRate);
 
   try {
@@ -134,7 +124,6 @@ int main() {
     midiin->setCallback(&midiCallback, reinterpret_cast<void *>(&synth));
     // start stream
     dac.openStream(&parameters, NULL, RTAUDIO_FLOAT64,
-                   // sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&osc));
                    sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&synth));
     dac.startStream();
   } catch (RtAudioError &e) {
