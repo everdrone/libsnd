@@ -1,4 +1,4 @@
-#include "envelope.hh"
+#include "envelope.h"
 
 namespace snd {
 

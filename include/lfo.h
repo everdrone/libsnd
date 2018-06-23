@@ -4,7 +4,7 @@
 #include <cmath>
 #include <memory>
 
-#include "approx.hh"
+#include "approx.h"
 
 namespace snd {
 namespace LFO {

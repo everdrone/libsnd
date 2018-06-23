@@ -2,7 +2,7 @@
 #define CONVERSION_H_
 
 #include <cmath>
-#include "approx.hh"
+#include "approx.h"
 
 #define DB_FACTOR 1.1220184543019634355910389464779057367223085073606
 #define DB_MULT 8.175800000000001

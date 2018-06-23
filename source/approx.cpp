@@ -1,4 +1,4 @@
-#include "approx.hh"
+#include "approx.h"
 
 namespace snd {
 

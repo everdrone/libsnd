@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <cmath>
-#include "utils.hh"
+#include "utils.h"
 
 namespace snd {
 

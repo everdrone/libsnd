@@ -1,4 +1,4 @@
-#include "interpolation.hh"
+#include "interpolation.h"
 
 namespace snd {
 

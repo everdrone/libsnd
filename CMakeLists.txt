@@ -17,14 +17,14 @@ option(BUILD_TESTS "Build unit tests" ON)
 add_library(
 	libsnd
 	STATIC
-	source/approx.cc
-	source/conversion.cc
-	source/denormal.cc
-	source/envelope.cc
-	source/interpolation.cc
-	source/lfo.cc
-	source/sawtooth.cc
-	source/sine.cc
+	source/approx.cpp
+	source/conversion.cpp
+	source/denormal.cpp
+	source/envelope.cpp
+	source/interpolation.cpp
+	source/lfo.cpp
+	source/sawtooth.cpp
+	source/sine.cpp
 )
 
 target_include_directories(
@@ -82,7 +82,7 @@ if (BUILD_TESTS)
 
 	add_executable(
 		Test
-		tests/test.cc
+		tests/test.cpp
 	)
 
 	target_include_directories(

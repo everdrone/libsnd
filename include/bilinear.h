@@ -9,7 +9,7 @@
  */
 
 #include <cmath>
-#include "conversion.hh"
+#include "conversion.h"
 
 namespace snd {
 namespace bilin {

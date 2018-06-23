@@ -1,4 +1,4 @@
-#include "lfo.hh"
+#include "lfo.h"
 
 namespace snd {
 namespace LFO {

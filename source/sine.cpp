@@ -1,4 +1,4 @@
-#include "sine.hh"
+#include "sine.h"
 
 namespace snd {
 

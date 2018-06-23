@@ -3,7 +3,7 @@
 
 #include <cstdlib>
 #include <cstdint>
-#include "denormal.hh"
+#include "denormal.h"
 
 namespace snd {
 

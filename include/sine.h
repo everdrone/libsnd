@@ -2,7 +2,7 @@
 #define SINE_H_
 
 #include <cmath>
-#include "approx.hh"
+#include "approx.h"
 
 namespace snd {
 

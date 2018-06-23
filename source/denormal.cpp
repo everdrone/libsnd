@@ -1,4 +1,4 @@
-#include "denormal.hh"
+#include "denormal.h"
 
 namespace snd {
 
