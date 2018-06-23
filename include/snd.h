@@ -111,7 +111,7 @@ class Sine {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template<class fp_t>
@@ -126,7 +126,7 @@ class Parabolic {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template<class fp_t>
@@ -141,7 +141,7 @@ class Triangle {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template<class fp_t>
@@ -156,7 +156,7 @@ class Sawtooth {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template<class fp_t>
@@ -173,7 +173,7 @@ class Square {
  private:
   fp_t out;
   fp_t pulseWidth;
-  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 }; // !LFO
@@ -308,7 +308,7 @@ class EnvelopeStage {
   EnvelopeStage();
   ~EnvelopeStage();
 
-  void init(struct EnvelopeFeed<fp_t>* feedPtr, uint8_t* current);
+  void init(struct EnvelopeFeed<fp_t> *feedPtr, uint8_t *current);
   void setIndex(uint8_t index);
   void setNextIndex(uint8_t nextIndex);
   void resetNextIndex();
@@ -319,8 +319,8 @@ class EnvelopeStage {
  private:
   bool triggerRequest;
   uint8_t Idx;
-  uint8_t* currentIdxPtr;
-  struct EnvelopeFeed<fp_t>* feedPtr;
+  uint8_t *currentIdxPtr;
+  struct EnvelopeFeed<fp_t> *feedPtr;
   struct EnvelopeFeed<fp_t> previous;
 };
 
@@ -328,7 +328,7 @@ template <class fp_t>
 class EnvelopeGenerator {
  public:
  public:
-  EnvelopeStage<fp_t>* stage;
+  EnvelopeStage<fp_t> *stage;
   fp_t speedFactor;
 
   EnvelopeGenerator(fp_t sampleRate, uint8_t nStages);

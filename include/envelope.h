@@ -51,7 +51,7 @@ class EnvelopeStage {
   }
   ~EnvelopeStage() {}
 
-  void init(struct EnvelopeFeed<fp_t>* feedPtr, uint8_t* current) {
+  void init(struct EnvelopeFeed<fp_t> *feedPtr, uint8_t *current) {
     this->feedPtr = feedPtr;
     currentIdxPtr = current;
   }
@@ -117,15 +117,15 @@ class EnvelopeStage {
  private:
   bool triggerRequest;
   uint8_t Idx;
-  uint8_t* currentIdxPtr;
-  struct EnvelopeFeed<fp_t>* feedPtr;
+  uint8_t *currentIdxPtr;
+  struct EnvelopeFeed<fp_t> *feedPtr;
   struct EnvelopeFeed<fp_t> previous;
 };
 
 template <class fp_t>
 class EnvelopeGenerator {
  public:
-  EnvelopeStage<fp_t>* stage;
+  EnvelopeStage<fp_t> *stage;
   fp_t speedFactor;
 
   EnvelopeGenerator(fp_t sampleRate, uint8_t nStages) {

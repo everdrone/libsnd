@@ -3,12 +3,12 @@
 #include <iostream>
 #include <cstdlib>
 
-int audioCallback(void* outputBuffer, void* inputBuffer,
+int audioCallback(void *outputBuffer, void *inputBuffer,
                   unsigned int nBufferFrames,
-                  double streamTime, RtAudioStreamStatus status, void* userData) {
+                  double streamTime, RtAudioStreamStatus status, void *userData) {
   unsigned int i;
-  double* buffer = reinterpret_cast<double*>(outputBuffer);
-  snd::Sine<double>* osc = reinterpret_cast<snd::Sine<double>*>(userData);
+  double *buffer = reinterpret_cast<double *>(outputBuffer);
+  snd::Sine<double> *osc = reinterpret_cast<snd::Sine<double>*>(userData);
 
   if (status) std::cout << "Stream underflow detected!" << std::endl;
 
@@ -46,9 +46,9 @@ int main() {
   try {
     // start stream
     dac.openStream(&parameters, NULL, RTAUDIO_FLOAT64,
-                   sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void*>(&osc));
+                   sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&osc));
     dac.startStream();
-  } catch (RtAudioError& e) {
+  } catch (RtAudioError &e) {
     e.printMessage();
     exit(0);
   }
@@ -59,7 +59,7 @@ int main() {
   try {
     // Stop the stream
     dac.stopStream();
-  } catch (RtAudioError& e) {
+  } catch (RtAudioError &e) {
     e.printMessage();
   }
 
