@@ -111,7 +111,7 @@ class Sine {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
 };
 
 template<class fp_t>
@@ -126,7 +126,7 @@ class Parabolic {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
 };
 
 template<class fp_t>
@@ -141,7 +141,7 @@ class Triangle {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
 };
 
 template<class fp_t>
@@ -156,7 +156,7 @@ class Sawtooth {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
 };
 
 template<class fp_t>
@@ -173,7 +173,7 @@ class Square {
  private:
   fp_t out;
   fp_t pulseWidth;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t> > phaseDriver;
 };
 
 }; // !LFO
