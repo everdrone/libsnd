@@ -11,7 +11,7 @@ Produces a 440Hz sine wave audio stream through the default system audio channel
 #### Compiling
 
 ```bash
-g++ sine.cc -o sine.out -lrtaudio -lsnd
+g++ -std=c++14 sine.cc -o sine.out -lrtaudio -lsnd
 ```
 
 ## [Audio + MIDI](https://github.com/everdrone/libsnd/tree/master/examples/midi)
@@ -28,5 +28,5 @@ This examples will listen on MIDI port 0 on your machine for *Note On* events.
 #### Compiling
 
 ```bash
-g++ midi.cc -o midi.out -lrtaudio -lrtmidi -lsnd
+g++ -std=c++14 midi.cc -o midi.out -lrtaudio -lrtmidi -lsnd
 ```
