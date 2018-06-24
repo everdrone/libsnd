@@ -1,4 +1,4 @@
-libsnd v0.0.8
+libsnd v0.1.0
 
 ## Warning
 **This library is still under development!**
