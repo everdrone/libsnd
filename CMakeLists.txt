@@ -10,7 +10,7 @@ set( CMAKE_CXX_EXTENSIONS OFF )
 set( CMAKE_COLOR_MAKEFILE ON )
 set( CMAKE_VERBOSE_MAKEFILE ON )
 
-option(BUILD_TESTS "Build unit tests" ON)
+option( BUILD_TESTS "Build unit tests" ON )
 
 ### Targets
 
@@ -41,13 +41,13 @@ set_target_properties(
 )
 
 ### dist
-set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${libsnd_VERSION})
+set( ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${libsnd_VERSION} )
 add_custom_target(dist
 		COMMAND tar -czf "${CMAKE_PROJECT_NAME}-${libsnd_VERSION}.tar.gz" source/
 			include/
 			docs/
 			examples/
-			tests/
+			test/
 			.gitignore
 			CHANGELOG.md
 			CMakeLists.txt
@@ -76,13 +76,12 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
 endif()
 
 ### Tests
-
-if (BUILD_TESTS)
+if ( BUILD_TESTS )
 	enable_testing()
 
 	add_executable(
 		Test
-		tests/test.cpp
+		test/test.cpp
 	)
 
 	target_include_directories(
@@ -103,8 +102,8 @@ if (BUILD_TESTS)
 	)
 endif()
 
-include(CMakePackageConfigHelpers)
-include(GNUInstallDirs)
+include( CMakePackageConfigHelpers )
+include( GNUInstallDirs )
 
 install(
 	TARGETS libsnd 
