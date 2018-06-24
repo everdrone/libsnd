@@ -63,6 +63,6 @@ class Sine {
   }
 };
 
-}; // !namespace snd
+}; // !snd
 
 #endif // !SINE_H
