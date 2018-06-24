@@ -95,6 +95,7 @@ if ( BUILD_TESTS )
 	add_subdirectory(
 		"${CMAKE_BINARY_DIR}/googletest-src"
 		"${CMAKE_BINARY_DIR}/googletest-build"
+		EXCLUDE_FROM_ALL
 	)
 
 	# The gtest/gmock targets carry header search path
@@ -104,6 +105,7 @@ if ( BUILD_TESTS )
 		include_directories(
 			"${gtest_SOURCE_DIR}/include"
 			"${gmock_SOURCE_DIR}/include"
+			EXCLUDE_FROM_ALL
 		)
 	endif()
 
