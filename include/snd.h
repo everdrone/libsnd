@@ -43,6 +43,7 @@ class FlipFlop {
  public:
   FlipFlop();
   FlipFlop(bool initialState);
+  ~FlipFlop();
 
   bool tick();
   bool state;

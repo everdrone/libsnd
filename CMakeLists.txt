@@ -25,6 +25,7 @@ add_library(
 	source/lfo.cpp
 	source/sawtooth.cpp
 	source/sine.cpp
+	source/utils.cpp
 )
 
 target_include_directories(
@@ -113,6 +114,7 @@ if ( BUILD_TESTS )
 		test
 		test/main.cpp
 		test/denormal.cpp
+		test/utils.cpp
 	)
 
 	target_link_libraries(test
@@ -120,6 +122,10 @@ if ( BUILD_TESTS )
 		libsnd
 	)
 
+	# add_test(
+	# 	NAME test
+	# 	COMMAND test
+	# )
 endif()
 
 include( CMakePackageConfigHelpers )

@@ -52,18 +52,11 @@ inline fp_t computeBLAMP(fp_t x) {
 
 class FlipFlop {
  public:
-  FlipFlop() {
-    state = false;
-  }
-  FlipFlop(bool initialState) {
-    state = initialState;
-  }
+  FlipFlop(bool initialState);
+  FlipFlop();
+  ~FlipFlop();
 
-  bool tick() {
-    state ^= true;
-    return state;
-  }
-
+  bool tick();
   bool state;
 };
 
