@@ -30,3 +30,16 @@ This examples will listen on MIDI port 0 on your machine for *Note On* events.
 ```bash
 g++ -std=c++14 midi.cc -o midi.out -lrtaudio -lrtmidi -lsnd
 ```
+
+## [FM Synth](https://github.com/everdrone/libsnd/tree/master/examples/fm_synth)
+
+#### Requirements
+
+* [RtAudio](http://www.music.mcgill.ca/~gary/rtaudio/)
+* [RtMIDI](http://www.music.mcgill.ca/~gary/rtmidi/)
+
+#### Compiling
+
+```bash
+g++ -std=c++14 fm_synth.cc -o fm_synth.out -lrtaudio -lrtmidi -lsnd
+```
