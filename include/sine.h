@@ -33,7 +33,8 @@ class Sine {
   }
 
   void setFrequency(fp_t frequency) {
-    this->frequency = frequency;
+    this->frequency = (frequency + frequencyState) * 0.5;
+    frequencyState = frequency;
   }
 
   void setPhase(fp_t phase) {
@@ -51,7 +52,6 @@ class Sine {
   void _interpolateFrequency() {
     increment = frequency / SR;
     increment = increment > 0.5 ? 0.5 : (increment < -0.5 ? -0.5 : increment);
-    frequencyState = frequency;
   }
 
   void _triangularDriver() {

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../include/snd.h"
+#include <snd.h>
 
 TEST(FlipFlop, CanFlip) {
   snd::FlipFlop flip_flop;

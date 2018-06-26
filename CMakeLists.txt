@@ -106,6 +106,7 @@ if ( BUILD_TESTS )
 		include_directories(
 			"${gtest_SOURCE_DIR}/include"
 			"${gmock_SOURCE_DIR}/include"
+			include
 			EXCLUDE_FROM_ALL
 		)
 	endif()
@@ -114,6 +115,7 @@ if ( BUILD_TESTS )
 		test
 		test/main.cpp
 		test/denormal.cpp
+		test/sine.cpp
 		test/utils.cpp
 	)
 

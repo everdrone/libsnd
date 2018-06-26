@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../include/snd.h"
+#include <snd.h>
 
 TEST(Denormal, CanCancel) {
   float a = snd::denormalCancel<float>(static_cast<float>(1e-40f));
