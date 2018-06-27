@@ -23,6 +23,7 @@ add_library(
 	source/envelope.cpp
 	source/interpolation.cpp
 	source/lfo.cpp
+	source/saturator.cpp
 	source/sawtooth.cpp
 	source/sine.cpp
 	source/utils.cpp
