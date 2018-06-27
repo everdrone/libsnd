@@ -117,6 +117,7 @@ if ( BUILD_TESTS )
 	add_executable(
 		test
 		test/main.cpp
+		test/bilinear.cpp
 		test/denormal.cpp
 		test/sine.cpp
 		test/utils.cpp
