@@ -32,12 +32,12 @@ class BilinearFilterBase {
 
   virtual void setFrequency(fp_t frequency) {}
   void setGain(fp_t gain) {
-    amplitude = std::powf(1.059253692626953, gain);
+    amplitude = std::pow(1.059253692626953, gain);
     amplitude *= amplitude;
   }
 
   fp_t tick(fp_t input) {
-    this->computeBilinear(input);
+    return this->computeBilinear(input);
   }
 
  protected:
@@ -65,7 +65,7 @@ class OnePoleHighPass : public BilinearFilterBase<fp_t> {
   ~OnePoleHighPass() {}
 
   void setFrequency(float frequency) {
-    fp_t freq = BLTPrewarp<fp_t>(frequency, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency, this->SR);
     // coeffs
     this->coeff[0] = 1.0f - freq;
     this->coeff[1] = 1.0f + freq;
@@ -82,7 +82,7 @@ class OnePoleLowPass : public BilinearFilterBase<fp_t> {
   ~OnePoleLowPass() {}
 
   void setFrequency(fp_t frequency) {
-    fp_t freq = BLTPrewarp<fp_t>(frequency, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency, this->SR);
     // coeffs
     this->coeff[0] = 1.0f - freq;
     this->coeff[1] = 1.0f + freq;
@@ -100,7 +100,7 @@ class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = BLTPrewarp<fp_t>(frequency * this->amplitude, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency * this->amplitude, this->SR);
     // coeffs
     this->coeff[0] = 1.0f - freq;
     this->coeff[1] = 1.0f + freq;
@@ -121,7 +121,7 @@ class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = BLTPrewarp<fp_t>(frequency / this->amplitude, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency / this->amplitude, this->SR);
     // coeffs
     this->coeff[0] = 1.0f - freq;
     this->coeff[1] = 1.0f + freq;
