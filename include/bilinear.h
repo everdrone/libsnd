@@ -1,13 +1,6 @@
 #ifndef BILINEAR_H_
 #define BILINEAR_H_
 
-/**
- * TODO:
- * - test
- *  * - write explicit instances into *.cc file
- * - add to header file
- */
-
 #include <cmath>
 #include <stdint.h>
 #include "conversion.h"
