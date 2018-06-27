@@ -43,7 +43,7 @@ fp_t tanh(fp_t x) {
   fp_t a = std::abs(x);
   if (a > 0.05) {
     if (a > 20) {
-      return x >= 0 ? : 1 : -1;
+      return x >= 0 ? 1 : -1;
     } else {
       fp_t b = std::exp(x + x);
       return (b - 1) / (b + 1);
