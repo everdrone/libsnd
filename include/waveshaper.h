@@ -12,7 +12,7 @@ class WaveShaper {
  public:
   WaveShaper() {
     output = 0;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)  {
       folded[i] = 0;
       bus[i] = 0;
       bus[i + 3] = 0;

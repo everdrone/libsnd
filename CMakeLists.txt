@@ -18,6 +18,7 @@ add_library(
 	libsnd
 	STATIC
 	source/approx.cpp
+	source/bilinear.cpp
 	source/conversion.cpp
 	source/denormal.cpp
 	source/envelope.cpp

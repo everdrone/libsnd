@@ -9,6 +9,7 @@
  */
 
 #include <cmath>
+#include <stdint.h>
 #include "conversion.h"
 
 namespace snd {
@@ -36,17 +37,18 @@ class BilinearFilterBase {
   }
 
   fp_t tick(fp_t input) {
-    this->_computeBilinear(input);
+    this->computeBilinear(input);
   }
 
- private:
+ protected:
   fp_t SR;
   fp_t coeff[3];
   fp_t state[2];
   fp_t amplitude;
   fp_t out;
 
-  inline fp_t compute_bilinear(fp_t in) {
+ private:
+  inline fp_t computeBilinear(fp_t in) {
     out = state[1] * coeff[0];
     out += in * coeff[1];
     out += state[0] * coeff[2];
@@ -59,76 +61,76 @@ class BilinearFilterBase {
 template <class fp_t>
 class OnePoleHighPass : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleHighPass(fp_t sampleRate) : BilinearFilterBase(sampleRate) {}
+  OnePoleHighPass(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
   ~OnePoleHighPass() {}
 
   void setFrequency(float frequency) {
-    fp_t freq = BLTPrewarp(frequency, SR);
+    fp_t freq = BLTPrewarp<fp_t>(frequency, this->SR);
     // coeffs
-    coeff[0] = 1.0f - freq;
-    coeff[1] = 1.0f + freq;
-    coeff[0] /= coeff[1];
-    coeff[1] /= 1.0f;
-    coeff[2] = -coeff[1];
+    this->coeff[0] = 1.0f - freq;
+    this->coeff[1] = 1.0f + freq;
+    this->coeff[0] /= this->coeff[1];
+    this->coeff[1] /= 1.0f;
+    this->coeff[2] = -this->coeff[1];
   }
 };
 
 template <class fp_t>
 class OnePoleLowPass : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleLowPass(fp_t sampleRate): BilinearFilterBase(sampleRate) {}
+  OnePoleLowPass(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
   ~OnePoleLowPass() {}
 
   void setFrequency(fp_t frequency) {
-    fp_t freq = BLTPrewarp(frequency, SR);
+    fp_t freq = BLTPrewarp<fp_t>(frequency, this->SR);
     // coeffs
-    coeff[0] = 1.0f - freq;
-    coeff[1] = 1.0f + freq;
-    coeff[0] /= coeff[1];
-    coeff[1] /= freq;
-    coeff[2] = coeff[1];
+    this->coeff[0] = 1.0f - freq;
+    this->coeff[1] = 1.0f + freq;
+    this->coeff[0] /= this->coeff[1];
+    this->coeff[1] /= freq;
+    this->coeff[2] = this->coeff[1];
   }
 };
 
 template <class fp_t>
 class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleHighShelf(fp_t sampleRate): BilinearFilterBase(sampleRate) {}
+  OnePoleHighShelf(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
   ~OnePoleHighShelf() {}
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = BLTPrewarp(frequency * amplitude, SR);
+    fp_t freq = BLTPrewarp<fp_t>(frequency * this->amplitude, this->SR);
     // coeffs
-    coeff[0] = 1.0f - freq;
-    coeff[1] = 1.0f + freq;
-    coeff[0] /= coeff[1];
-    coeff[2] = amplitude - 1.0f;
-    coeff[1] = coeff[2] / coeff[1];
-    coeff[2] = coeff[0] + coeff[1];
-    coeff[2] *= -1.0f;
-    coeff[1] += 1.0f;
+    this->coeff[0] = 1.0f - freq;
+    this->coeff[1] = 1.0f + freq;
+    this->coeff[0] /= this->coeff[1];
+    this->coeff[2] = this->amplitude - 1.0f;
+    this->coeff[1] = this->coeff[2] / this->coeff[1];
+    this->coeff[2] = this->coeff[0] + this->coeff[1];
+    this->coeff[2] *= -1.0f;
+    this->coeff[1] += 1.0f;
   }
 };
 
 template <class fp_t>
 class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleLowShelf(fp_t sampleRate): BilinearFilterBase(sampleRate) {}
+  OnePoleLowShelf(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
   ~OnePoleLowShelf() {}
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = BLTPrewarp(frequency / amplitude, SR);
+    fp_t freq = BLTPrewarp<fp_t>(frequency / this->amplitude, this->SR);
     // coeffs
-    coeff[0] = 1.0f - freq;
-    coeff[1] = 1.0f + freq;
-    coeff[0] /= coeff[1];
-    coeff[2] = amplitude - 1.0f;
-    coeff[1] = coeff[2] * coeff[1];
-    coeff[2] = coeff[0] + coeff[1];
-    coeff[2] -= coeff[0];
-    coeff[1] += 1.0f;
+    this->coeff[0] = 1.0f - freq;
+    this->coeff[1] = 1.0f + freq;
+    this->coeff[0] /= this->coeff[1];
+    this->coeff[2] = this->amplitude - 1.0f;
+    this->coeff[1] = this->coeff[2] * this->coeff[1];
+    this->coeff[2] = this->coeff[0] + this->coeff[1];
+    this->coeff[2] -= this->coeff[0];
+    this->coeff[1] += 1.0f;
   }
 };
 

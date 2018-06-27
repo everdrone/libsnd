@@ -252,7 +252,6 @@ template <typename fp_t> fp_t interp_4p4o4x(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_4p4o8x(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_4p4o16x(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_4p4o32x(fp_t x, fp_t y[4]);
-
 /**
  * @} !Interpolation
  */
@@ -307,6 +306,70 @@ class Sawtooth {
 };
 /**
  * @} !Oscillators
+ */
+
+/**
+ * @defgroup Bilinear
+ * @{
+ */
+namespace bilin {
+
+template <class fp_t>
+class BilinearFilterBase {
+ public:
+  BilinearFilterBase(fp_t sampleRate);
+  ~BilinearFilterBase();
+
+  virtual void setFrequency(fp_t frequency);
+  void setGain(fp_t gain);
+  fp_t tick(fp_t input);
+
+ protected:
+  fp_t SR;
+  fp_t coeff[3];
+  fp_t state[2];
+  fp_t amplitude;
+  fp_t out;
+
+ private:
+  inline fp_t computeBilinear(fp_t in);
+};
+
+template <class fp_t>
+class OnePoleHighPass : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleHighPass(fp_t sampleRate);
+  ~OnePoleHighPass();
+  void setFrequency(float frequency);
+};
+
+template <class fp_t>
+class OnePoleLowPass : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleLowPass(fp_t sampleRate);
+  ~OnePoleLowPass();
+  void setFrequency(fp_t frequency);
+};
+
+template <class fp_t>
+class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleHighShelf(fp_t sampleRate);
+  ~OnePoleHighShelf();
+  void setFreq(fp_t frequency);
+};
+
+template <class fp_t>
+class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleLowShelf(fp_t sampleRate);
+  ~OnePoleLowShelf();
+  void setFreq(fp_t frequency);
+};
+
+}; // !bilin
+/**
+ * #} !Bilinear
  */
 
 /**
