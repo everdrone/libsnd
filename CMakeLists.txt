@@ -26,6 +26,7 @@ add_library(
 	source/sawtooth.cpp
 	source/sine.cpp
 	source/utils.cpp
+	source/waveshaper.cpp
 )
 
 target_include_directories(

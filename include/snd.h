@@ -52,17 +52,40 @@ class FlipFlop {
  * @}
  */
 
+/**
+ * #defgroup Denormal
+ * @{
+ */
 template<typename fp_t>
 bool isDenormal(fp_t x);
 
 template<typename fp_t>
 fp_t denormalCancel(fp_t x);
+/**
+ * @} !Denormal
+ */
 
+/**
+ * @defgroup Approximation
+ * @{
+ */
 template<typename fp_t>
 fp_t sineApprox7odd(fp_t x);
 
 template <typename fp_t>
 fp_t tanRatApprox0Pi2(fp_t x);
+
+template <typename fp_t>
+fp_t sin(fp_t x);
+
+template <typename fp_t>
+fp_t cos(fp_t x);
+
+template <typename fp_t>
+fp_t tanh(fp_t x)
+/**
+ * @} !Approximation
+ */
 
 /**
  * @defgroup Conversion
@@ -77,6 +100,16 @@ template <typename fp_t> fp_t scale(fp_t x, fp_t a, fp_t b, fp_t c, fp_t d);
 template <typename fp_t> fp_t BLTPrewarp(fp_t frequency, fp_t sampleRate);
 /**
  * @} !Conversion
+ */
+
+/**
+ * @defgroup Saturator
+ * @{
+ */
+template <typename fp_t>
+fp_t tanhSaturator(fp_t x, fp_t level);
+/**
+ * @} !Saturator
  */
 
 /**
@@ -355,9 +388,34 @@ class EnvelopeGenerator {
   void _phaseProcess();
   void _computeData(bool stageTrigger, bool paramTrigger, uint8_t index);
 };
-
 /**
  * @} !Envelope
+ */
+
+/**
+ * @defgroup Waveshaper
+ * @{
+ */
+template <class fp_t>
+class WaveShaper {
+ public:
+  WaveShaper(fp_t sampleRate);
+  ~WaveShaper();
+
+  fp_t tick(fp_t x, fp_t switchPoint);
+
+ private:
+  fp_t SR;
+  fp_t folded[3];
+  fp_t bus[6];
+  fp_t output;
+  static constexpr fp_t piSquared = PI * PI;
+  static constexpr fp_t fourThirdsPiCubed = piSquared * PI * 1.333333333333333;
+
+  void folder(fp_t x);
+};
+/**
+ * @} !Waveshaper
  */
 
 }; // !snd

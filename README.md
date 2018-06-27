@@ -64,7 +64,7 @@ g++ main.cc -o a.out -lsnd
   * [ ] Biquad
   * [ ] Modular / Multiband
   * [ ] Comb
-* [ ] Waveshaper
+* [ ] Multistage Waveshaper
 * [ ] Envelope Generators
   * [x] Multistage Envelope Generator
   * [ ] Classic Dual Stage (AD) Envelope Generator
