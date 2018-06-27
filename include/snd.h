@@ -82,7 +82,7 @@ template <typename fp_t>
 fp_t cos(fp_t x);
 
 template <typename fp_t>
-fp_t tanh(fp_t x)
+fp_t tanh(fp_t x);
 /**
  * @} !Approximation
  */
@@ -361,7 +361,6 @@ class EnvelopeStage {
 template <class fp_t>
 class EnvelopeGenerator {
  public:
- public:
   EnvelopeStage<fp_t> *stage;
   fp_t speedFactor;
 
@@ -399,18 +398,17 @@ class EnvelopeGenerator {
 template <class fp_t>
 class WaveShaper {
  public:
-  WaveShaper(fp_t sampleRate);
+  WaveShaper();
   ~WaveShaper();
 
   fp_t tick(fp_t x, fp_t switchPoint);
 
  private:
-  fp_t SR;
   fp_t folded[3];
   fp_t bus[6];
   fp_t output;
-  static constexpr fp_t piSquared = PI * PI;
-  static constexpr fp_t fourThirdsPiCubed = piSquared * PI * 1.333333333333333;
+  static fp_t piSquared;
+  static fp_t fourThirdsPiCubed;
 
   void folder(fp_t x);
 };

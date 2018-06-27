@@ -10,8 +10,7 @@ namespace snd {
 template <class fp_t>
 class WaveShaper {
  public:
-  WaveShaper(fp_t sampleRate) {
-    SR = sampleRate;
+  WaveShaper() {
     output = 0;
     for (int i = 0; i < 3; i++) {
       folded[i] = 0;
@@ -49,7 +48,6 @@ class WaveShaper {
   }
 
  private:
-  fp_t SR;
   fp_t folded[3];
   fp_t bus[6];
   fp_t output;
