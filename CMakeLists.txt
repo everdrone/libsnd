@@ -118,6 +118,7 @@ if ( BUILD_TESTS )
 		test
 		test/main.cpp
 		test/bilinear.cpp
+		test/conversion.cpp
 		test/denormal.cpp
 		test/sine.cpp
 		test/utils.cpp
