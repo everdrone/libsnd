@@ -47,12 +47,14 @@ set_target_properties(
 ### dist
 set( ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${libsnd_VERSION} )
 add_custom_target(dist
-		COMMAND tar -czf "${CMAKE_PROJECT_NAME}-${libsnd_VERSION}.tar.gz" source/
-			include/
+		COMMAND tar -czf "${CMAKE_PROJECT_NAME}-${libsnd_VERSION}.tar.gz"
+		 	source/
+		  include/
 			docs/
 			examples/
 			test/
-			.gitignore
+      .gitignore
+      CPPLINT.cfg
 			CMakeLists.txt
 			Doxyfile
 			libsnd-config.cmake.in
