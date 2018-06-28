@@ -8,7 +8,7 @@ set( CMAKE_CXX_EXTENSIONS OFF )
 
 ### Verbosity
 set( CMAKE_COLOR_MAKEFILE ON )
-set( CMAKE_VERBOSE_MAKEFILE ON )
+set( CMAKE_VERBOSE_MAKEFILE OFF )
 
 option( BUILD_TESTS "Build unit tests" ON )
 
@@ -53,7 +53,6 @@ add_custom_target(dist
 			examples/
 			test/
 			.gitignore
-			CHANGELOG.md
 			CMakeLists.txt
 			Doxyfile
 			libsnd-config.cmake.in
