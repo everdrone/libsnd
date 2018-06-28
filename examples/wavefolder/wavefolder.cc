@@ -1,20 +1,21 @@
 #include <RtAudio.h>
 #include <RtMidi.h>
-#include <math.h>
-#include <iostream>
+#include <cmath>
 #include <cstdlib>
 #include <snd.h>
+
 
 class WaveFolderSynth {
  public:
   WaveFolderSynth(double sampleRate) {
     frequency = 0.f;
-    mix = 1.f;
+    mix = 0;
     drive = 0.f;
     output = 0.f;
     osc = new snd::Sine<double>(sampleRate);
     filter = new snd::bilin::OnePoleLowPass<double>(sampleRate);
-    filter->setFrequency(1000);
+    filter->setFrequency(10000);
+    shaper = new snd::WaveShaper<double>;
   }
   ~WaveFolderSynth() {}
 
@@ -22,8 +23,9 @@ class WaveFolderSynth {
     double a = osc->tick();
     double b = a * 2 * ((drive * drive * 7) + 1);
     b = filter->tick(b);
-    b = shaper.tick(b, fabs(frequency) * 10 + 100);
-    b = snd::tanhSaturator<double>(b, 0);
+    double c = (fabs(frequency) * 10) + 100;
+    b = shaper->tick(b, c);
+    b = snd::tanhSaturator<double>(b, 1);
     b *= 0.5;
     output = snd::interp_linear(mix, a, b);
     return output * 0.5;
@@ -44,7 +46,7 @@ class WaveFolderSynth {
 
  private:
   snd::Sine<double> *osc;
-  snd::WaveShaper<double> shaper;
+  snd::WaveShaper<double> *shaper;
   snd::bilin::OnePoleLowPass<double> *filter;
   double frequency;
   double mix, drive;
@@ -85,7 +87,7 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message,
   }
 }
 
-int main() {
+int main(int argc, char ** argv) {
   // instantiate rtaudio
   RtAudio dac;
   // ensure output devices
@@ -113,7 +115,7 @@ int main() {
   unsigned int bufferSize = 256;
 
   WaveFolderSynth synth(sampleRate);
-  synth.setPitch(60 - 12);
+  synth.setPitch(60);
 
   try {
     // setup midi port
