@@ -115,3 +115,116 @@ TEST(Conversion, decibelToAmpFactor_negative) {
     1e-4
   );
 }
+
+TEST(Conversion, logTimeToSeconds_millisecond) {
+  double num = 0;
+  EXPECT_NEAR(
+    0.001,
+    snd::logTimeToSeconds(num),
+    1e-7
+  );
+}
+
+TEST(Conversion, logTimeToSeconds_one) {
+  double num = 60;
+  EXPECT_NEAR(
+    1,
+    snd::logTimeToSeconds(num),
+    1e-7
+  );
+}
+
+TEST(Conversion, logTimeToSeconds_ten) {
+  double num = 80;
+  EXPECT_NEAR(
+    10,
+    snd::logTimeToSeconds(num),
+    1e-7
+  );
+}
+
+TEST(Conversion, scale_base) {
+  double x = 1;
+  double a = 1;
+  double b = 127;
+  double c = 0;
+  double d = 1;
+  EXPECT_DOUBLE_EQ(
+    0,
+    snd::scale(x, a, b, c, d)
+  );
+}
+
+TEST(Conversion, scale_half) {
+  double x = 0.5;
+  double a = 0;
+  double b = 1;
+  double c = 0;
+  double d = 1;
+  EXPECT_DOUBLE_EQ(
+    0.5,
+    snd::scale(x, a, b, c, d)
+  );
+}
+
+TEST(Conversion, scale_negative) {
+  double x = 50;
+  double a = -100;
+  double b = 100;
+  double c = 0;
+  double d = 100;
+  EXPECT_DOUBLE_EQ(
+    75,
+    snd::scale(x, a, b, c, d)
+  );
+}
+
+TEST(Conversion, BLTPrewarp_base) {
+  double freq = 1;
+  double sampleRate = 44100;
+  EXPECT_NEAR(
+    0.0001,
+    snd::BLTPrewarp(freq, sampleRate),
+    1e-4
+  );
+}
+
+TEST(Conversion, BLTPrewarp_floating) {
+  double freq = 440.998;
+  double sampleRate = 44100;
+  EXPECT_NEAR(
+    0.0314,
+    snd::BLTPrewarp(freq, sampleRate),
+    1e-4
+  );
+}
+
+TEST(Conversion, BLTPrewarp_high) {
+  double freq = 2000.1;
+  double sampleRate = 44100;
+  EXPECT_NEAR(
+    0.1435,
+    snd::BLTPrewarp(freq, sampleRate),
+    1e-4
+  );
+}
+
+TEST(Conversion, BLTPrewarp_almost_nyquist) {
+  double freq = 22000;
+  double sampleRate = 44100;
+  EXPECT_NEAR(
+    15.9992,
+    snd::BLTPrewarp(freq, sampleRate),
+    1e-4
+  );
+}
+
+TEST(Conversion, BLTPrewarp_aliasing) {
+  double freq = 44100;
+  double sampleRate = 44100;
+  EXPECT_NEAR(
+    15.9992,
+    snd::BLTPrewarp(freq, sampleRate),
+    1e-4
+  );
+}
