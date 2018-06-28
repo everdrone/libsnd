@@ -1,8 +1,5 @@
 #include <gtest/gtest.h>
-#include <cmath>
 #include <snd.h>
-
-#include <iostream>
 
 TEST(Conversion, pitchToFrequency_base) {
   uint8_t pitch = 60;
