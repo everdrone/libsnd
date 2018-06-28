@@ -1,12 +1,40 @@
 #include <gtest/gtest.h>
 #include <snd.h>
 
-TEST(Denormal, canCancel) {
-  float a = snd::denormalCancel<float>(static_cast<float>(1e-40f));
-  EXPECT_FLOAT_EQ(0, a);
+TEST(Denormal, denormalCancel_will_cancel) {
+  float a = 1e-40;
+  EXPECT_FLOAT_EQ(
+    0,
+    snd::denormalCancel<float>(a)
+  );
 }
 
-TEST(Denormal, canTest) {
-  float a = snd::isDenormal<float>(static_cast<float>(1e-40f));
-  EXPECT_TRUE(a);
+TEST(Denormal, denormalCancel_wont_cancel) {
+  float a = 1e-12;
+  EXPECT_FLOAT_EQ(
+    a,
+    snd::denormalCancel<float>(a)
+  );
+}
+
+TEST(Denormal, denormalCancel_bignum) {
+  float a = 1e+12;
+  EXPECT_FLOAT_EQ(
+    a,
+    snd::denormalCancel<float>(a)
+  );
+}
+
+TEST(Denormal, isDenormal_true) {
+  float a = 1e-40;
+  EXPECT_TRUE(
+    snd::isDenormal<float>(a)
+  );
+}
+
+TEST(Denormal, isDenormal_false) {
+  float a = -1e-9;
+  EXPECT_FALSE(
+    snd::isDenormal<float>(a)
+  );
 }
