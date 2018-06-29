@@ -118,6 +118,7 @@ if ( BUILD_TESTS )
 	add_executable(
 		test
 		test/main.cpp
+    test/approx.cpp
 		test/bilinear.cpp
 		test/conversion.cpp
 		test/denormal.cpp
