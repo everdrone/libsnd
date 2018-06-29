@@ -33,7 +33,7 @@ make install
 
 #define SAMPLE_RATE 44100
 
-int main(int argc, char* argv[]) {
+int main(int argc, char **argv) {
   snd::Sine<float> s(SAMPLE_RATE);
   s.setFrequency(440);
 
@@ -94,7 +94,7 @@ g++ main.cc -o a.out -lsnd
   * [ ] Ring Modulator
   * [ ] Bit Crusher
   * [ ] Compressor
-  * [ ] Driver/Saturator
+  * [ ] Driver / Saturator
 * [ ] Utilities
   * [ ] LR to MS
   * [ ] MS to LR
