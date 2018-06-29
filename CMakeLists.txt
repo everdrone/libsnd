@@ -122,6 +122,7 @@ if ( BUILD_TESTS )
 		test/bilinear.cpp
 		test/conversion.cpp
 		test/denormal.cpp
+		test/interpolation.cpp
 		test/saturator.cpp
 		test/sine.cpp
 		test/utils.cpp
