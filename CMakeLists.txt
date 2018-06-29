@@ -123,6 +123,7 @@ if ( BUILD_TESTS )
     test/conversion.cpp
     test/denormal.cpp
     test/interpolation.cpp
+    test/lfo.cpp
     test/saturator.cpp
     test/sine.cpp
     test/utils.cpp

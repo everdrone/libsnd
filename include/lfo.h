@@ -15,7 +15,7 @@ class LFOBase {
   LFOBase(fp_t sampleRate) {
     this->SR = sampleRate;
     freq = 0;
-    state = 0;
+    this->setPhase(0);
   }
   ~LFOBase() {}
 
