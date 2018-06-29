@@ -87,7 +87,7 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message,
   }
 }
 
-int main(int argc, char ** argv) {
+int main(int argc, char **argv) {
   // instantiate rtaudio
   RtAudio dac;
   // ensure output devices
