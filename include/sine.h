@@ -14,6 +14,7 @@ class Sine {
     frequencyState = initialFrequency;
     frequency = 0;
     increment = sineStep = out = latency = 0;
+    // TODO(everdrone): set initial phase to 0
     this->setPhase(0.5);
   };
   ~Sine() {};
