@@ -120,9 +120,9 @@ class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
     this->coeff[1] = 1.0 + freq;
     this->coeff[0] /= this->coeff[1];
     this->coeff[2] = this->amplitude - 1.0;
+    this->coeff[1] = freq / this->coeff[1];
     this->coeff[1] = this->coeff[2] * this->coeff[1];
-    this->coeff[2] = this->coeff[0] + this->coeff[1];
-    this->coeff[2] -= this->coeff[0];
+    this->coeff[2] = this->coeff[1] - this->coeff[0];
     this->coeff[1] += 1.0;
   }
 };
