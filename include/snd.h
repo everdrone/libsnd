@@ -43,6 +43,7 @@ class FlipFlop {
  public:
   FlipFlop();
   FlipFlop(bool initialState);
+  ~FlipFlop();
 
   bool tick();
   bool state;
@@ -51,17 +52,40 @@ class FlipFlop {
  * @}
  */
 
+/**
+ * #defgroup Denormal
+ * @{
+ */
 template<typename fp_t>
 bool isDenormal(fp_t x);
 
 template<typename fp_t>
 fp_t denormalCancel(fp_t x);
+/**
+ * @} !Denormal
+ */
 
+/**
+ * @defgroup Approximation
+ * @{
+ */
 template<typename fp_t>
 fp_t sineApprox7odd(fp_t x);
 
 template <typename fp_t>
 fp_t tanRatApprox0Pi2(fp_t x);
+
+template <typename fp_t>
+fp_t sin(fp_t x);
+
+template <typename fp_t>
+fp_t cos(fp_t x);
+
+template <typename fp_t>
+fp_t tanh(fp_t x);
+/**
+ * @} !Approximation
+ */
 
 /**
  * @defgroup Conversion
@@ -76,6 +100,16 @@ template <typename fp_t> fp_t scale(fp_t x, fp_t a, fp_t b, fp_t c, fp_t d);
 template <typename fp_t> fp_t BLTPrewarp(fp_t frequency, fp_t sampleRate);
 /**
  * @} !Conversion
+ */
+
+/**
+ * @defgroup Saturator
+ * @{
+ */
+template <typename fp_t>
+fp_t tanhSaturator(fp_t x, fp_t level);
+/**
+ * @} !Saturator
  */
 
 /**
@@ -218,7 +252,6 @@ template <typename fp_t> fp_t interp_4p4o4x(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_4p4o8x(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_4p4o16x(fp_t x, fp_t y[4]);
 template <typename fp_t> fp_t interp_4p4o32x(fp_t x, fp_t y[4]);
-
 /**
  * @} !Interpolation
  */
@@ -230,7 +263,7 @@ template <typename fp_t> fp_t interp_4p4o32x(fp_t x, fp_t y[4]);
 template <class fp_t>
 class Sine {
  public:
-  Sine(fp_t sampleRate);
+  Sine(fp_t sampleRate, fp_t initialFrequency = 0);
   ~Sine();
 
   fp_t tick();
@@ -251,7 +284,7 @@ class Sine {
 template <class fp_t>
 class Sawtooth {
  public:
-  Sawtooth(fp_t sampleRate);
+  Sawtooth(fp_t sampleRate, fp_t initialFrequency = 0);
   ~Sawtooth();
 
   fp_t tick();
@@ -273,6 +306,70 @@ class Sawtooth {
 };
 /**
  * @} !Oscillators
+ */
+
+/**
+ * @defgroup Bilinear
+ * @{
+ */
+namespace bilin {
+
+template <class fp_t>
+class BilinearFilterBase {
+ public:
+  BilinearFilterBase(fp_t sampleRate);
+  ~BilinearFilterBase();
+
+  virtual void setFrequency(fp_t frequency);
+  void setGain(fp_t gain);
+  fp_t tick(fp_t input);
+
+ protected:
+  fp_t SR;
+  fp_t coeff[3];
+  fp_t state[2];
+  fp_t amplitude;
+  fp_t out;
+
+ private:
+  inline fp_t computeBilinear(fp_t in);
+};
+
+template <class fp_t>
+class OnePoleHighPass : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleHighPass(fp_t sampleRate);
+  ~OnePoleHighPass();
+  void setFrequency(float frequency);
+};
+
+template <class fp_t>
+class OnePoleLowPass : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleLowPass(fp_t sampleRate);
+  ~OnePoleLowPass();
+  void setFrequency(fp_t frequency);
+};
+
+template <class fp_t>
+class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleHighShelf(fp_t sampleRate);
+  ~OnePoleHighShelf();
+  void setFreq(fp_t frequency);
+};
+
+template <class fp_t>
+class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
+ public:
+  OnePoleLowShelf(fp_t sampleRate);
+  ~OnePoleLowShelf();
+  void setFreq(fp_t frequency);
+};
+
+}; // !bilin
+/**
+ * #} !Bilinear
  */
 
 /**
@@ -327,7 +424,6 @@ class EnvelopeStage {
 template <class fp_t>
 class EnvelopeGenerator {
  public:
- public:
   EnvelopeStage<fp_t> *stage;
   fp_t speedFactor;
 
@@ -354,9 +450,33 @@ class EnvelopeGenerator {
   void _phaseProcess();
   void _computeData(bool stageTrigger, bool paramTrigger, uint8_t index);
 };
-
 /**
  * @} !Envelope
+ */
+
+/**
+ * @defgroup Waveshaper
+ * @{
+ */
+template <class fp_t>
+class WaveShaper {
+ public:
+  WaveShaper();
+  ~WaveShaper();
+
+  fp_t tick(fp_t x, fp_t switchPoint);
+
+ private:
+  fp_t folded[3];
+  fp_t bus[6];
+  fp_t output;
+  static fp_t piSquared;
+  static fp_t fourThirdsPiCubed;
+
+  void folder(fp_t x);
+};
+/**
+ * @} !Waveshaper
  */
 
 }; // !snd
