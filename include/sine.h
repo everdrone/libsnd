@@ -9,10 +9,12 @@ namespace snd {
 template <class fp_t>
 class Sine {
  public:
-  Sine(fp_t sampleRate) {
+  Sine(fp_t sampleRate, fp_t initialFrequency = 0) {
     SR = sampleRate;
-    phase = frequency = frequencyState = 0;
+    frequencyState = initialFrequency;
+    frequency = 0;
     increment = sineStep = out = latency = 0;
+    this->setPhase(0.5);
   };
   ~Sine() {};
 
@@ -32,9 +34,9 @@ class Sine {
     return latency;
   }
 
-  void setFrequency(fp_t frequency) {
-    this->frequency = (frequency + frequencyState) * 0.5;
-    frequencyState = frequency;
+  void setFrequency(fp_t freq) {
+    this->frequency = (freq + frequencyState) * 0.5;
+    frequencyState = freq;
   }
 
   void setPhase(fp_t phase) {

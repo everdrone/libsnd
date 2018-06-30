@@ -10,12 +10,11 @@ namespace snd {
 template <class fp_t>
 class Sawtooth {
  public:
-  Sawtooth(fp_t sampleRate) {
+  Sawtooth(fp_t sampleRate, fp_t initialFrequency = 0) {
     SR = sampleRate;
-
-    phase = out = latency = 0;
-    frequency = frequencyState = increment = 0;
-
+    frequencyState = initialFrequency;
+    out = latency = 0;
+    frequency = increment = 0;
     // wave specific
     flipFlop.state = false;
     flipFlop_old = !flipFlop.state;
@@ -26,6 +25,7 @@ class Sawtooth {
       temp[i] = 0;
       inject[i] = 0;
     }
+    this->setPhase();
   }
   ~Sawtooth() {}
 
@@ -69,6 +69,7 @@ class Sawtooth {
 
   void setFrequency(fp_t frequency) {
     this->frequency = frequency;
+    frequencyState = frequency;
   }
 
   void setPhase(fp_t phase) {
@@ -94,7 +95,6 @@ class Sawtooth {
   void _interpolateFrequency() {
     increment = frequency / SR;
     increment = increment > 0.5 ? 0.5 : (increment < -0.5 ? -0.5 : increment);
-    frequencyState = frequency;
   }
 };
 

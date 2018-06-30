@@ -263,7 +263,7 @@ template <typename fp_t> fp_t interp_4p4o32x(fp_t x, fp_t y[4]);
 template <class fp_t>
 class Sine {
  public:
-  Sine(fp_t sampleRate);
+  Sine(fp_t sampleRate, fp_t initialFrequency = 0);
   ~Sine();
 
   fp_t tick();
@@ -284,7 +284,7 @@ class Sine {
 template <class fp_t>
 class Sawtooth {
  public:
-  Sawtooth(fp_t sampleRate);
+  Sawtooth(fp_t sampleRate, fp_t initialFrequency = 0);
   ~Sawtooth();
 
   fp_t tick();
