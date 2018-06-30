@@ -25,7 +25,7 @@ class Sawtooth {
       temp[i] = 0;
       inject[i] = 0;
     }
-    this->setPhase();
+    this->setPhase(0);
   }
   ~Sawtooth() {}
 
