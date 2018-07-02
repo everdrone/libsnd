@@ -10,10 +10,10 @@ class ADSREnevelope {
   ADSREnevelope(double sample_rate) {
     gen = new snd::EnvelopeGenerator<double>(sample_rate, 3);
     // set stage parameters
-    this->sustainLevel = 0.35f;
+    this->sustain_level = 0.35f;
     gen->stage[0].inject(0, 0.f, 1.f, 0.001, 0);
-    gen->stage[1].inject(2, 1.f, sustainLevel, 0.4f, 0);
-    gen->stage[2].inject(2, sustainLevel, 0.f, 0.1f, 0);
+    gen->stage[1].inject(2, 1.f, sustain_level, 0.4f, 0);
+    gen->stage[2].inject(2, sustain_level, 0.f, 0.1f, 0);
   }
   ~ADSREnevelope() {
     delete gen;
@@ -23,13 +23,13 @@ class ADSREnevelope {
     gen->stage[0].inject(0, 0.f, 1.f, atk, 0);
   }
   void decay(float dec) {
-    gen->stage[1].inject(2, 1.f, sustainLevel, dec, 0);
+    gen->stage[1].inject(2, 1.f, sustain_level, dec, 0);
   }
   void sustain(float sus) {
-    this->sustainLevel = sus;
+    this->sustain_level = sus;
   }
   void release(float rel) {
-    gen->stage[2].inject(2, sustainLevel, 0.f, rel, 0);
+    gen->stage[2].inject(2, sustain_level, 0.f, rel, 0);
   }
 
   double tick() {
@@ -46,7 +46,7 @@ class ADSREnevelope {
 
  private:
   snd::EnvelopeGenerator<double> *gen;
-  float sustainLevel;
+  float sustain_level;
 };
 
 class FMSynth {

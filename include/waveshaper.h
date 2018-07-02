@@ -52,7 +52,8 @@ class WaveShaper {
   fp_t bus[6];
   fp_t output;
   static constexpr fp_t pi_squared = PI * PI;
-  static constexpr fp_t four_thirds_pi_cubed = pi_squared * PI * 1.333333333333333;
+  static constexpr fp_t four_thirds_pi_cubed = pi_squared * PI *
+      1.333333333333333;
 
   void folder(fp_t x) {
     fp_t sign = x >= 0.0 ? 1.0 : -1.0;

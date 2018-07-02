@@ -93,7 +93,8 @@ class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = snd::BLTPrewarp<fp_t>(frequency * this->amplitude, this->sample_rate);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency * this->amplitude,
+                                      this->sample_rate);
     // coeffs
     this->coeff[0] = 1.0 - freq;
     this->coeff[1] = 1.0 + freq;
@@ -114,7 +115,8 @@ class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = snd::BLTPrewarp<fp_t>(frequency / this->amplitude, this->sample_rate);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency / this->amplitude,
+                                      this->sample_rate);
     // coeffs
     this->coeff[0] = 1.0 - freq;
     this->coeff[1] = 1.0 + freq;
