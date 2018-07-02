@@ -2,8 +2,8 @@
 
 namespace snd {
 
-FlipFlop::FlipFlop(bool initialState) {
-  state = initialState;
+FlipFlop::FlipFlop(bool initial_state) {
+  state = initial_state;
 }
 FlipFlop::FlipFlop() {
   state = false;

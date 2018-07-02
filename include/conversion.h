@@ -37,9 +37,9 @@ fp_t scale(fp_t x, fp_t a, fp_t b, fp_t c, fp_t d) {
 }
 
 template <typename fp_t>
-fp_t BLTPrewarp(fp_t frequency, fp_t sampleRate) {
+fp_t BLTPrewarp(fp_t frequency, fp_t sample_rate) {
   fp_t x = frequency < 0.0 ? 0.0 : frequency;
-  x *= PI / sampleRate;
+  x *= PI / sample_rate;
   x = x > 1.50845 ? 1.50845 : x;
   return tanRatApprox0Pi2(x);
 }

@@ -42,7 +42,7 @@ inline fp_t computeBLAMP(fp_t x);
 class FlipFlop {
  public:
   FlipFlop();
-  FlipFlop(bool initialState);
+  FlipFlop(bool initial_state);
   ~FlipFlop();
 
   bool tick();
@@ -97,7 +97,7 @@ template <typename fp_t> fp_t ampFactorToDeciBel(fp_t amp);
 template <typename fp_t> fp_t deciBelToAmpFactor(fp_t dB);
 template <typename fp_t> fp_t logTimeToSeconds(fp_t time);
 template <typename fp_t> fp_t scale(fp_t x, fp_t a, fp_t b, fp_t c, fp_t d);
-template <typename fp_t> fp_t BLTPrewarp(fp_t frequency, fp_t sampleRate);
+template <typename fp_t> fp_t BLTPrewarp(fp_t frequency, fp_t sample_rate);
 /**
  * @} !Conversion
  */
@@ -121,14 +121,14 @@ namespace lfo {
 template<class fp_t>
 class LFOBase {
  public:
-  LFOBase(fp_t sampleRate);
+  LFOBase(fp_t sample_rate);
   ~LFOBase();
 
   void setFrequency(fp_t frequency);
   void setPhase(fp_t phase);
   fp_t tick();
  private:
-  fp_t SR;
+  fp_t sample_rate;
   fp_t state;
   fp_t freq;
 };
@@ -136,7 +136,7 @@ class LFOBase {
 template<class fp_t>
 class Sine {
  public:
-  Sine(fp_t sampleRate);
+  Sine(fp_t sample_rate);
   ~Sine();
 
   void setFrequency(fp_t frequency);
@@ -145,13 +145,13 @@ class Sine {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phase_driver;
 };
 
 template<class fp_t>
 class Parabolic {
  public:
-  Parabolic(fp_t sampleRate);
+  Parabolic(fp_t sample_rate);
   ~Parabolic();
 
   void setFrequency(fp_t frequency);
@@ -160,13 +160,13 @@ class Parabolic {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phase_driver;
 };
 
 template<class fp_t>
 class Triangle {
  public:
-  Triangle(fp_t sampleRate);
+  Triangle(fp_t sample_rate);
   ~Triangle();
 
   void setFrequency(fp_t frequency);
@@ -175,13 +175,13 @@ class Triangle {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phase_driver;
 };
 
 template<class fp_t>
 class Sawtooth {
  public:
-  Sawtooth(fp_t sampleRate);
+  Sawtooth(fp_t sample_rate);
   ~Sawtooth();
 
   void setFrequency(fp_t frequency);
@@ -190,13 +190,13 @@ class Sawtooth {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  std::unique_ptr<LFOBase<fp_t>> phase_driver;
 };
 
 template<class fp_t>
 class Square {
  public:
-  Square(fp_t sampleRate);
+  Square(fp_t sample_rate);
   ~Square();
 
   void setFrequency(fp_t frequency);
@@ -206,8 +206,8 @@ class Square {
 
  private:
   fp_t out;
-  fp_t pulseWidth;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
+  fp_t pulse_width;
+  std::unique_ptr<LFOBase<fp_t>> phase_driver;
 };
 
 }; // !lfo
@@ -263,7 +263,7 @@ template <typename fp_t> fp_t interp_4p4o32x(fp_t x, fp_t y[4]);
 template <class fp_t>
 class Sine {
  public:
-  Sine(fp_t sampleRate, fp_t initialFrequency = 0);
+  Sine(fp_t sample_rate, fp_t initial_frequency = 0);
   ~Sine();
 
   fp_t tick();
@@ -273,9 +273,9 @@ class Sine {
 
 
  private:
-  fp_t SR, frequency;
-  fp_t phase, frequencyState, increment,
-       latency, sineStep, out;
+  fp_t sample_rate, frequency;
+  fp_t phase, frequency_state, increment,
+       latency, sine_step, out;
 
   void _interpolateFrequency();
   void _triangularDriver();
@@ -284,7 +284,7 @@ class Sine {
 template <class fp_t>
 class Sawtooth {
  public:
-  Sawtooth(fp_t sampleRate, fp_t initialFrequency = 0);
+  Sawtooth(fp_t sample_rate, fp_t initial_frequency = 0);
   ~Sawtooth();
 
   fp_t tick();
@@ -293,12 +293,12 @@ class Sawtooth {
   void setPhase(fp_t phase);
 
  private:
-  fp_t SR, phase, frequency,
-       frequencyState, increment;
-  fp_t latency, out, phaseSign,
-       snc, phaseState;
-  FlipFlop flipFlop;
-  bool flipFlop_old;
+  fp_t sample_rate, phase, frequency,
+       frequency_state, increment;
+  fp_t latency, out, phase_sign,
+       snc, phase_state;
+  FlipFlop flip_flop;
+  bool flip_flop_state;
   int8_t state[2];
   fp_t temp[2], sign[2], inject[2], blep;
 
@@ -317,7 +317,7 @@ namespace bilin {
 template <class fp_t>
 class BilinearFilterBase {
  public:
-  BilinearFilterBase(fp_t sampleRate);
+  BilinearFilterBase(fp_t sample_rate);
   ~BilinearFilterBase();
 
   virtual void setFrequency(fp_t frequency);
@@ -325,7 +325,7 @@ class BilinearFilterBase {
   fp_t tick(fp_t input);
 
  protected:
-  fp_t SR;
+  fp_t sample_rate;
   fp_t coeff[3];
   fp_t state[2];
   fp_t amplitude;
@@ -338,7 +338,7 @@ class BilinearFilterBase {
 template <class fp_t>
 class OnePoleHighPass : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleHighPass(fp_t sampleRate);
+  OnePoleHighPass(fp_t sample_rate);
   ~OnePoleHighPass();
   void setFrequency(float frequency);
 };
@@ -346,7 +346,7 @@ class OnePoleHighPass : public BilinearFilterBase<fp_t> {
 template <class fp_t>
 class OnePoleLowPass : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleLowPass(fp_t sampleRate);
+  OnePoleLowPass(fp_t sample_rate);
   ~OnePoleLowPass();
   void setFrequency(fp_t frequency);
 };
@@ -354,7 +354,7 @@ class OnePoleLowPass : public BilinearFilterBase<fp_t> {
 template <class fp_t>
 class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleHighShelf(fp_t sampleRate);
+  OnePoleHighShelf(fp_t sample_rate);
   ~OnePoleHighShelf();
   void setFreq(fp_t frequency);
 };
@@ -362,7 +362,7 @@ class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
 template <class fp_t>
 class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleLowShelf(fp_t sampleRate);
+  OnePoleLowShelf(fp_t sample_rate);
   ~OnePoleLowShelf();
   void setFreq(fp_t frequency);
 };
@@ -378,12 +378,12 @@ class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
  */
 template <typename fp_t>
 struct EnvelopeFeed {
-  bool forceStart;
+  bool force_start;
   fp_t start;
   fp_t stop;
   fp_t time;
   fp_t bend;
-  uint8_t Idx;
+  uint8_t index;
   EnvelopeFeed();
 };
 
@@ -393,7 +393,7 @@ struct EnvelopeStorage {
   fp_t stop;
   fp_t time;
   fp_t bend;
-  uint8_t nextIdx;
+  uint8_t next_index;
   uint8_t mode;
   EnvelopeStorage();
 };
@@ -405,9 +405,9 @@ class EnvelopeStage {
   EnvelopeStage();
   ~EnvelopeStage();
 
-  void init(struct EnvelopeFeed<fp_t> *feedPtr, uint8_t *current);
+  void init(struct EnvelopeFeed<fp_t> *feed_ptr, uint8_t *current);
   void setIndex(uint8_t index);
-  void setNextIndex(uint8_t nextIndex);
+  void setNextIndex(uint8_t next_index);
   void resetNextIndex();
   uint8_t getIndex();
   void inject(uint8_t mode, fp_t y0, fp_t y1, fp_t time, fp_t bend);
@@ -415,9 +415,9 @@ class EnvelopeStage {
 
  private:
   bool triggerRequest;
-  uint8_t Idx;
-  uint8_t *currentIdxPtr;
-  struct EnvelopeFeed<fp_t> *feedPtr;
+  uint8_t index;
+  uint8_t *current_idx_ptr;
+  struct EnvelopeFeed<fp_t> *feed_ptr;
   struct EnvelopeFeed<fp_t> previous;
 };
 
@@ -427,7 +427,7 @@ class EnvelopeGenerator {
   EnvelopeStage<fp_t> *stage;
   fp_t speedFactor;
 
-  EnvelopeGenerator(fp_t sampleRate, uint8_t nStages);
+  EnvelopeGenerator(fp_t sample_rate, uint8_t num_stages);
   ~EnvelopeGenerator();
   fp_t tick();
   void triggerStage(uint8_t index);
@@ -441,8 +441,8 @@ class EnvelopeGenerator {
   fp_t state;
   uint32_t N;
   uint32_t phase;
-  uint8_t nStages;
-  uint8_t phaseDec;
+  uint8_t num_stages;
+  uint8_t phase_dec;
   uint8_t currentIdx;
 
   void _setCurrentIdx(uint8_t index);
@@ -464,14 +464,14 @@ class WaveShaper {
   WaveShaper();
   ~WaveShaper();
 
-  fp_t tick(fp_t x, fp_t switchPoint);
+  fp_t tick(fp_t x, fp_t switch_point);
 
  private:
   fp_t folded[3];
   fp_t bus[6];
   fp_t output;
-  static fp_t piSquared;
-  static fp_t fourThirdsPiCubed;
+  static fp_t pi_squared;
+  static fp_t four_thirds_pi_cubed;
 
   void folder(fp_t x);
 };

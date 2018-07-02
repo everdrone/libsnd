@@ -13,7 +13,7 @@ namespace snd {
 template <class fp_t>
 class Triangle {
  public:
-  Triangle(fp_t sampleRate) {
+  Triangle(fp_t sample_rate) {
 
   }
   ~Triangle() {}

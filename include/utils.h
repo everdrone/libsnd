@@ -52,7 +52,7 @@ inline fp_t computeBLAMP(fp_t x) {
 
 class FlipFlop {
  public:
-  FlipFlop(bool initialState);
+  FlipFlop(bool initial_state);
   FlipFlop();
   ~FlipFlop();
 

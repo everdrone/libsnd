@@ -181,50 +181,50 @@ TEST(Conversion, scale_negative) {
 
 TEST(Conversion, BLTPrewarp_base) {
   double freq = 1;
-  double sampleRate = 44100;
+  double sample_rate = 44100;
   EXPECT_NEAR(
     0.0001,
-    snd::BLTPrewarp(freq, sampleRate),
+    snd::BLTPrewarp(freq, sample_rate),
     1e-4
   );
 }
 
 TEST(Conversion, BLTPrewarp_floating) {
   double freq = 440.998;
-  double sampleRate = 44100;
+  double sample_rate = 44100;
   EXPECT_NEAR(
     0.0314,
-    snd::BLTPrewarp(freq, sampleRate),
+    snd::BLTPrewarp(freq, sample_rate),
     1e-4
   );
 }
 
 TEST(Conversion, BLTPrewarp_high) {
   double freq = 2000.1;
-  double sampleRate = 44100;
+  double sample_rate = 44100;
   EXPECT_NEAR(
     0.1435,
-    snd::BLTPrewarp(freq, sampleRate),
+    snd::BLTPrewarp(freq, sample_rate),
     1e-4
   );
 }
 
 TEST(Conversion, BLTPrewarp_almost_nyquist) {
   double freq = 22000;
-  double sampleRate = 44100;
+  double sample_rate = 44100;
   EXPECT_NEAR(
     15.9992,
-    snd::BLTPrewarp(freq, sampleRate),
+    snd::BLTPrewarp(freq, sample_rate),
     1e-4
   );
 }
 
 TEST(Conversion, BLTPrewarp_aliasing) {
   double freq = 44100;
-  double sampleRate = 44100;
+  double sample_rate = 44100;
   EXPECT_NEAR(
     15.9992,
-    snd::BLTPrewarp(freq, sampleRate),
+    snd::BLTPrewarp(freq, sample_rate),
     1e-4
   );
 }

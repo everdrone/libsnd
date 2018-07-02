@@ -10,15 +10,16 @@ namespace snd {
 template <class fp_t>
 class Sawtooth {
  public:
-  Sawtooth(fp_t sampleRate, fp_t initialFrequency = 0) {
-    SR = sampleRate;
-    frequencyState = initialFrequency;
+  Sawtooth(fp_t sample_rate, fp_t initial_frequency = 0) {
+    sample_rate = sample_rate;
+    frequency_state = initial_frequency;
+    frequency = initial_frequency;
     out = latency = 0;
-    frequency = increment = 0;
+    increment = 0;
     // wave specific
-    flipFlop.state = false;
-    flipFlop_old = !flipFlop.state;
-    phaseState = snc = phaseSign = 0;
+    flip_flop.state = false;
+    flip_flop_state = !flip_flop.state;
+    phase_state = snc = phase_sign = 0;
     for (uint8_t i = 0; i < 2; i++) {
       state[i] = 0;
       sign[i] = 1;
@@ -31,21 +32,21 @@ class Sawtooth {
 
   fp_t tick() {
     this->_interpolateFrequency();
-    phaseState = phase;
+    phase_state = phase;
     phase -= increment;
     if (0.5 < std::abs(phase)) {
-      phaseSign = phase < 0 ? -1 : 1;
-      phase -= phaseSign;
-      snc = (phase + (-phaseSign * -0.5)) / -increment;
-      inject[0] = phaseSign;
-      inject[1] = phaseSign;
-      if (flipFlop.state && flipFlop.state != flipFlop_old) {
+      phase_sign = phase < 0 ? -1 : 1;
+      phase -= phase_sign;
+      snc = (phase + (-phase_sign * -0.5)) / -increment;
+      inject[0] = phase_sign;
+      inject[1] = phase_sign;
+      if (flip_flop.state && flip_flop.state != flip_flop_state) {
         state[0] = -2;
-      } else if ((!flipFlop.state) && flipFlop.state != flipFlop_old) {
+      } else if ((!flip_flop.state) && flip_flop.state != flip_flop_state) {
         state[1] = -2;
       }
-      flipFlop_old = flipFlop.state;
-      flipFlop.tick();
+      flip_flop_state = flip_flop.state;
+      flip_flop.tick();
     }
     for (uint8_t i = 0; i < 2; i++) {
       if (state[i] < 2) {
@@ -61,7 +62,7 @@ class Sawtooth {
     }
     blep = temp[0] + temp[1];
     latency = out;
-    out = phaseState;
+    out = phase_state;
     latency += blep;
     latency += latency;
     return latency;
@@ -69,7 +70,7 @@ class Sawtooth {
 
   void setFrequency(fp_t frequency) {
     this->frequency = frequency;
-    frequencyState = frequency;
+    frequency_state = frequency;
   }
 
   void setPhase(fp_t phase) {
@@ -80,12 +81,12 @@ class Sawtooth {
   }
 
  private:
-  fp_t SR;
-  fp_t phase, frequency, frequencyState;
+  fp_t sample_rate;
+  fp_t phase, frequency, frequency_state;
   fp_t increment, latency, out;
-  fp_t phaseSign, snc, phaseState;
-  FlipFlop flipFlop;
-  bool flipFlop_old;
+  fp_t phase_sign, snc, phase_state;
+  FlipFlop flip_flop;
+  bool flip_flop_state;
   int8_t state[2];
   fp_t temp[2];
   fp_t sign[2];
@@ -93,7 +94,7 @@ class Sawtooth {
   fp_t blep;
 
   void _interpolateFrequency() {
-    increment = frequency / SR;
+    increment = frequency / sample_rate;
     increment = increment > 0.5 ? 0.5 : (increment < -0.5 ? -0.5 : increment);
   }
 };

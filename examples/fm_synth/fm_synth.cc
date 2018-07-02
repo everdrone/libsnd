@@ -7,8 +7,8 @@
 
 class ADSREnevelope {
  public:
-  ADSREnevelope(double sampleRate) {
-    gen = new snd::EnvelopeGenerator<double>(sampleRate, 3);
+  ADSREnevelope(double sample_rate) {
+    gen = new snd::EnvelopeGenerator<double>(sample_rate, 3);
     // set stage parameters
     this->sustainLevel = 0.35f;
     gen->stage[0].inject(0, 0.f, 1.f, 0.001, 0);
@@ -51,13 +51,13 @@ class ADSREnevelope {
 
 class FMSynth {
  public:
-  FMSynth(double sampleRate) {
-    env = new ADSREnevelope(sampleRate);
+  FMSynth(double sample_rate) {
+    env = new ADSREnevelope(sample_rate);
     frequency = mix = 0.f;
     output = 0.f;
     for (int i = 0; i < 2; i++) {
-      osc[i] = new snd::Sine<double>(sampleRate);
-      ops[i] = new snd::Sine<double>(sampleRate);
+      osc[i] = new snd::Sine<double>(sample_rate);
+      ops[i] = new snd::Sine<double>(sample_rate);
       interval[i] = 0.f;
       out[i] = 0.f;
       out[i + 2] = 0.f;
@@ -178,10 +178,10 @@ int main() {
   parameters.deviceId = dac.getDefaultOutputDevice();
   parameters.nChannels = 2;
   parameters.firstChannel = 0;
-  unsigned int sampleRate = 44100;
+  unsigned int sample_rate = 44100;
   unsigned int bufferSize = 256;
 
-  FMSynth synth(sampleRate);
+  FMSynth synth(sample_rate);
   synth.setInterval(0.5);
   synth.setAmount(0.5);
 
@@ -191,7 +191,7 @@ int main() {
     midiin->setCallback(&midiCallback, reinterpret_cast<void *>(&synth));
     // start stream
     dac.openStream(&parameters, NULL, RTAUDIO_FLOAT64,
-                   sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&synth));
+                   sample_rate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&synth));
     dac.startStream();
   } catch (RtAudioError &e) {
     e.printMessage();

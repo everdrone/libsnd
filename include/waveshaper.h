@@ -20,7 +20,7 @@ class WaveShaper {
   }
   ~WaveShaper() {}
 
-  fp_t tick(fp_t x, fp_t switchPoint) {
+  fp_t tick(fp_t x, fp_t switch_point) {
     this->folder(x);
     fp_t ii = 1.0 / (x - bus[3]);
     fp_t hh = 1.0 / ((x - bus[4]) * 0.5);
@@ -32,7 +32,7 @@ class WaveShaper {
       ll = (folded[1] - bus[1]) * ii;
     }
     // calc output
-    if (std::abs(hh) > switchPoint) {
+    if (std::abs(hh) > switch_point) {
       output = (bus[0] + folded[0]) * 0.5;
     } else {
       output = hh * (ll - bus[5]);
@@ -51,8 +51,8 @@ class WaveShaper {
   fp_t folded[3];
   fp_t bus[6];
   fp_t output;
-  static constexpr fp_t piSquared = PI * PI;
-  static constexpr fp_t fourThirdsPiCubed = piSquared * PI * 1.333333333333333;
+  static constexpr fp_t pi_squared = PI * PI;
+  static constexpr fp_t four_thirds_pi_cubed = pi_squared * PI * 1.333333333333333;
 
   void folder(fp_t x) {
     fp_t sign = x >= 0.0 ? 1.0 : -1.0;
@@ -61,11 +61,11 @@ class WaveShaper {
     if (x > TWO_PI) {
       fp_t a = x - (sign * TWO_PI);
       folded[0] = a;
-      fp_t b = (piSquared + piSquared) * x;
+      fp_t b = (pi_squared + pi_squared) * x;
       fp_t c = x * x * x * 0.1666666666666666;
       b += c;
       c = ((x * x) - 2.0) * PI;
-      c += fourThirdsPiCubed;
+      c += four_thirds_pi_cubed;
       c *= sign;
       folded[1] = b - c;
       folded[2] = 0.5 * a * a;

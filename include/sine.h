@@ -9,11 +9,11 @@ namespace snd {
 template <class fp_t>
 class Sine {
  public:
-  Sine(fp_t sampleRate, fp_t initialFrequency = 0) {
-    SR = sampleRate;
-    frequencyState = initialFrequency;
-    frequency = 0;
-    increment = sineStep = out = latency = 0;
+  Sine(fp_t sample_rate, fp_t initial_frequency = 0) {
+    this->sample_rate = sample_rate;
+    frequency_state = initial_frequency;
+    frequency = initial_frequency;
+    increment = sine_step = out = latency = 0;
     // TODO(everdrone): set initial phase to 0
     this->setPhase(0.5);
   };
@@ -23,7 +23,7 @@ class Sine {
     this->_interpolateFrequency();
     latency = out;
     this->_triangularDriver();
-    out = sineApprox7odd<fp_t>(sineStep);
+    out = sineApprox7odd<fp_t>(sine_step);
     phase -= increment;
     fp_t sign = -1;
     if (0.5 < std::abs(phase)) {
@@ -36,8 +36,8 @@ class Sine {
   }
 
   void setFrequency(fp_t freq) {
-    this->frequency = (freq + frequencyState) * 0.5;
-    frequencyState = freq;
+    this->frequency = (freq + frequency_state) * 0.5;
+    frequency_state = freq;
   }
 
   void setPhase(fp_t phase) {
@@ -48,21 +48,21 @@ class Sine {
   }
 
  private:
-  fp_t SR;
+  fp_t sample_rate;
   fp_t frequency;
-  fp_t phase, frequencyState, increment, latency, sineStep, out;
+  fp_t phase, frequency_state, increment, latency, sine_step, out;
 
   void _interpolateFrequency() {
-    increment = frequency / SR;
+    increment = frequency / sample_rate;
     increment = increment > 0.5 ? 0.5 : (increment < -0.5 ? -0.5 : increment);
   }
 
   void _triangularDriver() {
-    sineStep = phase - 0.25;
-    sineStep -= std::round(sineStep);
-    sineStep += sineStep;
-    sineStep = std::abs(sineStep);
-    sineStep = 0.5 - sineStep;
+    sine_step = phase - 0.25;
+    sine_step -= std::round(sine_step);
+    sine_step += sine_step;
+    sine_step = std::abs(sine_step);
+    sine_step = 0.5 - sine_step;
   }
 };
 

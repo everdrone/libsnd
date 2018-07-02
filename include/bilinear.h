@@ -11,8 +11,8 @@ namespace bilin {
 template <class fp_t>
 class BilinearFilterBase {
  public:
-  BilinearFilterBase(fp_t sampleRate) {
-    SR = sampleRate;
+  BilinearFilterBase(fp_t sample_rate) {
+    sample_rate = sample_rate;
     out = amplitude = 0;
     for (uint8_t i = 0; i < 3; i++) {
       if (i < 2) {
@@ -34,7 +34,7 @@ class BilinearFilterBase {
   }
 
  protected:
-  fp_t SR;
+  fp_t sample_rate;
   fp_t coeff[3];
   fp_t state[2];
   fp_t amplitude;
@@ -54,11 +54,11 @@ class BilinearFilterBase {
 template <class fp_t>
 class OnePoleHighPass : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleHighPass(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
+  OnePoleHighPass(fp_t sample_rate) : BilinearFilterBase<fp_t>(sample_rate) {}
   ~OnePoleHighPass() {}
 
   void setFrequency(fp_t frequency) {
-    fp_t freq = snd::BLTPrewarp<fp_t>(frequency, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency, this->sample_rate);
     // coeffs
     this->coeff[0] = 1.0 - freq;
     this->coeff[1] = 1.0 + freq;
@@ -71,11 +71,11 @@ class OnePoleHighPass : public BilinearFilterBase<fp_t> {
 template <class fp_t>
 class OnePoleLowPass : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleLowPass(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
+  OnePoleLowPass(fp_t sample_rate) : BilinearFilterBase<fp_t>(sample_rate) {}
   ~OnePoleLowPass() {}
 
   void setFrequency(fp_t frequency) {
-    fp_t freq = snd::BLTPrewarp<fp_t>(frequency, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency, this->sample_rate);
     // coeffs
     this->coeff[0] = 1.0 - freq;
     this->coeff[1] = 1.0 + freq;
@@ -88,12 +88,12 @@ class OnePoleLowPass : public BilinearFilterBase<fp_t> {
 template <class fp_t>
 class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleHighShelf(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
+  OnePoleHighShelf(fp_t sample_rate) : BilinearFilterBase<fp_t>(sample_rate) {}
   ~OnePoleHighShelf() {}
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = snd::BLTPrewarp<fp_t>(frequency * this->amplitude, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency * this->amplitude, this->sample_rate);
     // coeffs
     this->coeff[0] = 1.0 - freq;
     this->coeff[1] = 1.0 + freq;
@@ -109,12 +109,12 @@ class OnePoleHighShelf : public BilinearFilterBase<fp_t> {
 template <class fp_t>
 class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
  public:
-  OnePoleLowShelf(fp_t sampleRate) : BilinearFilterBase<fp_t>(sampleRate) {}
+  OnePoleLowShelf(fp_t sample_rate) : BilinearFilterBase<fp_t>(sample_rate) {}
   ~OnePoleLowShelf() {}
 
   void setFreq(fp_t frequency) {
     // prewarp
-    fp_t freq = snd::BLTPrewarp<fp_t>(frequency / this->amplitude, this->SR);
+    fp_t freq = snd::BLTPrewarp<fp_t>(frequency / this->amplitude, this->sample_rate);
     // coeffs
     this->coeff[0] = 1.0 - freq;
     this->coeff[1] = 1.0 + freq;

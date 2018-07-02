@@ -37,16 +37,16 @@ int main() {
   parameters.deviceId = dac.getDefaultOutputDevice();
   parameters.nChannels = 2;
   parameters.firstChannel = 0;
-  unsigned int sampleRate = 44100;
+  unsigned int sample_rate = 44100;
   unsigned int bufferSize = 256;
 
-  snd::Sine<double> osc(sampleRate);
+  snd::Sine<double> osc(sample_rate);
   osc.setFrequency(440);
 
   try {
     // start stream
     dac.openStream(&parameters, NULL, RTAUDIO_FLOAT64,
-                   sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&osc));
+                   sample_rate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&osc));
     dac.startStream();
   } catch (RtAudioError &e) {
     e.printMessage();

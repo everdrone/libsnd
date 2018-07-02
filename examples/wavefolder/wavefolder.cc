@@ -7,13 +7,13 @@
 
 class WaveFolderSynth {
  public:
-  WaveFolderSynth(double sampleRate) {
+  WaveFolderSynth(double sample_rate) {
     frequency = 0.f;
     mix = 0;
     drive = 0.f;
     output = 0.f;
-    osc = new snd::Sine<double>(sampleRate);
-    filter = new snd::bilin::OnePoleLowPass<double>(sampleRate);
+    osc = new snd::Sine<double>(sample_rate);
+    filter = new snd::bilin::OnePoleLowPass<double>(sample_rate);
     filter->setFrequency(10000);
     shaper = new snd::WaveShaper<double>;
   }
@@ -111,10 +111,10 @@ int main(int argc, char **argv) {
   parameters.deviceId = dac.getDefaultOutputDevice();
   parameters.nChannels = 2;
   parameters.firstChannel = 0;
-  unsigned int sampleRate = 44100;
+  unsigned int sample_rate = 44100;
   unsigned int bufferSize = 256;
 
-  WaveFolderSynth synth(sampleRate);
+  WaveFolderSynth synth(sample_rate);
   synth.setPitch(60);
 
   try {
@@ -123,7 +123,7 @@ int main(int argc, char **argv) {
     midiin->setCallback(&midiCallback, reinterpret_cast<void *>(&synth));
     // start stream
     dac.openStream(&parameters, NULL, RTAUDIO_FLOAT64,
-                   sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&synth));
+                   sample_rate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&synth));
     dac.startStream();
   } catch (RtAudioError &e) {
     e.printMessage();

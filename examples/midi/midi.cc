@@ -6,8 +6,8 @@
 
 class ADEnevelope {
  public:
-  ADEnevelope(double sampleRate) {
-    gen = new snd::EnvelopeGenerator<double>(sampleRate, 2);
+  ADEnevelope(double sample_rate) {
+    gen = new snd::EnvelopeGenerator<double>(sample_rate, 2);
     // set stage parameters
     gen->stage[0].inject(0, 0.f, 1.f, 0.001, 0);
     gen->stage[1].inject(2, 1.f, 0.f, 0.4f, 0);
@@ -30,9 +30,9 @@ class ADEnevelope {
 
 class MiniSynth {
  public:
-  MiniSynth(double sampleRate) {
-    osc = new snd::Sine<double>(sampleRate);
-    env = new ADEnevelope(sampleRate);
+  MiniSynth(double sample_rate) {
+    osc = new snd::Sine<double>(sample_rate);
+    env = new ADEnevelope(sample_rate);
     frequency = 0.f;
   }
   ~MiniSynth() {
@@ -113,10 +113,10 @@ int main() {
   parameters.deviceId = dac.getDefaultOutputDevice();
   parameters.nChannels = 2;
   parameters.firstChannel = 0;
-  unsigned int sampleRate = 44100;
+  unsigned int sample_rate = 44100;
   unsigned int bufferSize = 256;
 
-  MiniSynth synth(sampleRate);
+  MiniSynth synth(sample_rate);
 
   try {
     // setup midi port
@@ -124,7 +124,7 @@ int main() {
     midiin->setCallback(&midiCallback, reinterpret_cast<void *>(&synth));
     // start stream
     dac.openStream(&parameters, NULL, RTAUDIO_FLOAT64,
-                   sampleRate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&synth));
+                   sample_rate, &bufferSize, &audioCallback, reinterpret_cast<void *>(&synth));
     dac.startStream();
   } catch (RtAudioError &e) {
     e.printMessage();
