@@ -36,8 +36,7 @@ class Sine {
   }
 
   void setFrequency(fp_t freq) {
-    this->frequency = (freq + frequency_state) * 0.5;
-    frequency_state = freq;
+    frequency_input = freq;
   }
 
   void setPhase(fp_t phase) {
@@ -50,9 +49,11 @@ class Sine {
  private:
   fp_t sample_rate;
   fp_t frequency;
-  fp_t phase, frequency_state, increment, latency, sine_step, out;
+  fp_t phase, frequency_state, frequency_input, increment, latency, sine_step, out;
 
   void _interpolateFrequency() {
+    this->frequency = (frequency_input + frequency_state) * 0.5;
+    frequency_state = frequency_input;
     increment = frequency / sample_rate;
     increment = increment > 0.5 ? 0.5 : (increment < -0.5 ? -0.5 : increment);
   }

@@ -23,15 +23,15 @@ const double polyBLEP[8] = {
 
 const double polyBLAMP[9] = {
   -0.824736,
-    3.99944,
-    -5.95132,
-    -0.31906666666666666666666666666667,
-    7.83529,
-    -2.600752,
-    -7.6752,
-    7.7164571428571428571428571428571,
-    -2.180115
-  };
+  3.99944,
+  -5.95132,
+  -0.31906666666666666666666666666667,
+  7.83529,
+  -2.600752,
+  -7.6752,
+  7.7164571428571428571428571428571,
+  -2.180115
+};
 
 template <typename fp_t>
 inline fp_t computeBLEP(fp_t x);
@@ -275,7 +275,8 @@ class Sine {
  private:
   fp_t sample_rate, frequency;
   fp_t phase, frequency_state, increment,
-       latency, sine_step, out;
+       frequency_input, latency,
+       sine_step, out;
 
   void _interpolateFrequency();
   void _triangularDriver();
