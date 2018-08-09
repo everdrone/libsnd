@@ -1,7 +1,7 @@
 #include "lfo.h"
 
 namespace snd {
-namespace LFO {
+namespace lfo {
 
 template class LFOBase<float>;
 template class LFOBase<double>;
@@ -21,5 +21,5 @@ template class Sawtooth<double>;
 template class Square<float>;
 template class Square<double>;
 
-}; // !LFO
+}; // !lfo
 }; // !snd
