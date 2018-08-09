@@ -1,5 +1,4 @@
-#ifndef BILINEAR_H_
-#define BILINEAR_H_
+#pragma once
 
 #include <cmath>
 #include <stdint.h>
@@ -130,5 +129,3 @@ class OnePoleLowShelf : public BilinearFilterBase<fp_t> {
 
 }; // !bilin
 }; // !snd
-
-#endif // !BILINEAR_H_

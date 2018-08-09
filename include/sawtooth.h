@@ -1,5 +1,4 @@
-#ifndef SAWTOOTH_H_
-#define SAWTOOTH_H_
+#pragma once
 
 #include <stdint.h>
 #include <cmath>
@@ -99,5 +98,3 @@ class Sawtooth {
 };
 
 }; // !snd
-
-#endif // !SAWTOOTH_H_

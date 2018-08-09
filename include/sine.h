@@ -1,5 +1,4 @@
-#ifndef SINE_H_
-#define SINE_H_
+#pragma once
 
 #include <cmath>
 #include "approx.h"
@@ -67,5 +66,3 @@ class Sine {
 };
 
 }; // !snd
-
-#endif // !SINE_H

@@ -1,5 +1,4 @@
-#ifndef TRIANGLE_H_
-#define TRIANGLE_H_
+#pragma once
 
 /**
  * TODO:
@@ -27,4 +26,3 @@ class Triangle {
 
 }; // !snd
 
-#endif // !TRIANGLE_H_

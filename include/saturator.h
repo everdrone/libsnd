@@ -1,5 +1,4 @@
-#ifndef SATURATOR_H_
-#define SATURATOR_H_
+#pragma once
 
 #include "approx.h"
 
@@ -11,5 +10,3 @@ fp_t tanhSaturator(fp_t x, fp_t level) {
 }
 
 }; // !snd
-
-#endif // !SATURATOR_H_

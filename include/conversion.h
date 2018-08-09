@@ -1,5 +1,4 @@
-#ifndef CONVERSION_H_
-#define CONVERSION_H_
+#pragma once
 
 #include <cmath>
 #include "approx.h"
@@ -45,5 +44,3 @@ fp_t BLTPrewarp(fp_t frequency, fp_t sampleRate) {
 }
 
 }; // !snd
-
-#endif // !CONVERSION_H_

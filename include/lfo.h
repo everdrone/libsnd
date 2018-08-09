@@ -1,5 +1,4 @@
-#ifndef LFO_H_
-#define LFO_H_
+#pragma once
 
 #include <cmath>
 #include <memory>
@@ -190,5 +189,3 @@ class Square {
 
 }; // !LFO
 }; // !snd
-
-#endif // !LFO_H_

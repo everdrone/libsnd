@@ -1,5 +1,4 @@
-#ifndef APPROX_H_
-#define APPROX_H_
+#pragma once
 
 #include <cmath>
 
@@ -54,5 +53,3 @@ fp_t tanh(fp_t x) {
 }
 
 }; // !snd
-
-#endif // !APPROX_H_

@@ -1,5 +1,4 @@
-#ifndef DENORMAL_H_
-#define DENORMAL_H_
+#pragma once
 
 #include <cmath>
 #include <cfloat>
@@ -19,5 +18,3 @@ fp_t denormalCancel(fp_t x) {
 }
 
 }; // !snd
-
-#endif // !DENORMAL_H_

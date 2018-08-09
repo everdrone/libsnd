@@ -1,5 +1,4 @@
-#ifndef ENVELOPE_H_
-#define ENVELOPE_H_
+#pragma once
 
 #include <cstdlib>
 #include <cstdint>
@@ -282,5 +281,3 @@ class EnvelopeGenerator {
 };
 
 }; // !snd
-
-#endif // !ENVELOPE_H_

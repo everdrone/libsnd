@@ -1,5 +1,4 @@
-#ifndef INTERPOLATION_H_
-#define INTERPOLATION_H_
+#pragma once
 
 namespace snd {
 
@@ -522,5 +521,3 @@ fp_t interp_4p4o32x(fp_t x, fp_t y[4]) {
 }
 
 }; // !snd
-
-#endif // !INTERPOLATION_H_

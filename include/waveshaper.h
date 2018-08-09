@@ -1,5 +1,4 @@
-#ifndef WAVESHAPER_H_
-#define WAVESHAPER_H_
+#pragma once
 
 #include <cmath>
 #include "approx.h"
@@ -78,5 +77,3 @@ class WaveShaper {
 };
 
 }; // !snd
-
-#endif // !WAVESHAPER_H_
