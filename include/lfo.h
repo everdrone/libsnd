@@ -6,7 +6,7 @@
 #include "approx.h"
 
 namespace snd {
-namespace LFO {
+namespace lfo {
 
 template <class fp_t>
 class LFOBase {
@@ -187,5 +187,5 @@ class Square {
   std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
-}; // !LFO
+}; // !lfo
 }; // !snd

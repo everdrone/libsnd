@@ -116,7 +116,7 @@ fp_t tanhSaturator(fp_t x, fp_t level);
  * @defgroup LFO
  * @{
  */
-namespace LFO {
+namespace lfo {
 
 template<class fp_t>
 class LFOBase {
@@ -210,9 +210,9 @@ class Square {
   std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
-}; // !LFO
+}; // !lfo
 /**
- * @} !LFO
+ * @} !lfo
  */
 
 /**

@@ -2,7 +2,7 @@
 #include <snd.h>
 
 TEST(LFO, LFOBase) {
-  snd::LFO::LFOBase<double> ramp(44100);
+  snd::lfo::LFOBase<double> ramp(44100);
   ramp.setFrequency(440);
   double value = 0;
   for (int i = 0; i < 100; i++) {
@@ -27,7 +27,7 @@ TEST(LFO, LFOBase) {
 }
 
 TEST(LFO, Sine) {
-  snd::LFO::Sine<double> lfo(44100);
+  snd::lfo::Sine<double> lfo(44100);
   lfo.setFrequency(440);
   double value = 0;
   for (int i = 0; i < 100; i++) {
@@ -55,7 +55,7 @@ TEST(LFO, Sine) {
 }
 
 TEST(LFO, Triangle) {
-  snd::LFO::Triangle<double> lfo(44100);
+  snd::lfo::Triangle<double> lfo(44100);
   lfo.setFrequency(440);
   double value = 0;
   for (int i = 0; i < 100; i++) {
@@ -83,7 +83,7 @@ TEST(LFO, Triangle) {
 }
 
 TEST(LFO, Parabolic) {
-  snd::LFO::Parabolic<double> lfo(44100);
+  snd::lfo::Parabolic<double> lfo(44100);
   lfo.setFrequency(440);
   double value = 0;
   for (int i = 0; i < 100; i++) {
@@ -111,7 +111,7 @@ TEST(LFO, Parabolic) {
 }
 
 TEST(LFO, Sawtooth) {
-  snd::LFO::Sawtooth<double> lfo(44100);
+  snd::lfo::Sawtooth<double> lfo(44100);
   lfo.setFrequency(440);
   double value = 0;
   for (int i = 0; i < 100; i++) {
@@ -139,7 +139,7 @@ TEST(LFO, Sawtooth) {
 }
 
 TEST(LFO, Square) {
-  snd::LFO::Square<double> lfo(44100);
+  snd::lfo::Square<double> lfo(44100);
   lfo.setFrequency(440);
   double value = 0;
   for (int i = 0; i < 100; i++) {
