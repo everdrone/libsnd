@@ -30,7 +30,7 @@ class LFOBase {
     this->state = ph;
   }
 
-  fp_t tick() {
+  fp_t process() {
     state += freq;
     state -= std::round(state);
     return state;
@@ -43,23 +43,23 @@ class LFOBase {
 };
 
 template <class fp_t>
-class Sine {
+class Sine : public LFOBase<fp_t> {
  public:
-  Sine(fp_t sampleRate) {
-    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
+  Sine(fp_t sampleRate) : LFOBase<fp_t>(sampleRate) {
+    out = 0.0;
   };
   ~Sine() {};
 
   void setFrequency(fp_t frequency) {
-    phaseDriver->setFrequency(frequency);
+    LFOBase<fp_t>::setFrequency(frequency);
   }
 
   void setPhase(fp_t phase) {
-    phaseDriver->setPhase(phase);
+    LFOBase<fp_t>::setPhase(phase);
   }
 
   fp_t tick() {
-    out = phaseDriver->tick();
+    out = this->process();
     // triangular driver
     out = std::abs(out + out);
     out = 0.5 - out;
@@ -69,54 +69,52 @@ class Sine {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
-class Parabolic {
+class Parabolic : public LFOBase<fp_t> {
  public:
-  Parabolic(fp_t sampleRate) {
-    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
+  Parabolic(fp_t sampleRate) : LFOBase<fp_t>(sampleRate) {
+    out = 0.0;
   };
   ~Parabolic() {};
 
   void setFrequency(fp_t frequency) {
-    phaseDriver->setFrequency(frequency);
+    LFOBase<fp_t>::setFrequency(frequency);
   }
 
   void setPhase(fp_t phase) {
-    phaseDriver->setPhase(phase);
+    LFOBase<fp_t>::setPhase(phase);
   }
 
   fp_t tick() {
-    out = phaseDriver->tick();
+    out = this->process();
     out = 0.25 - std::abs(out);
     return (8.0 * out) * (1.0 - (2.0 * std::abs(out)));
   }
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
-class Triangle {
+class Triangle : public LFOBase<fp_t> {
  public:
-  Triangle(fp_t sampleRate) {
-    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
+  Triangle(fp_t sampleRate) : LFOBase<fp_t>(sampleRate) {
+    out = 0.0;
   };
   ~Triangle() {};
 
   void setFrequency(fp_t frequency) {
-    phaseDriver->setFrequency(frequency);
+    LFOBase<fp_t>::setFrequency(frequency);
   }
 
   void setPhase(fp_t phase) {
-    phaseDriver->setPhase(phase);
+    LFOBase<fp_t>::setPhase(phase);
   }
 
   fp_t tick() {
-    out = phaseDriver->tick();
+    out = this->process();
     // triangular driver
     out = std::abs(out) * 4.0;
     return out - 1.0;
@@ -124,50 +122,48 @@ class Triangle {
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
-class Sawtooth {
+class Sawtooth : public LFOBase<fp_t> {
  public:
-  Sawtooth(fp_t sampleRate) {
-    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
+  Sawtooth(fp_t sampleRate) : LFOBase<fp_t>(sampleRate) {
+    out = 0.0;
   }
   ~Sawtooth() {}
 
   void setFrequency(fp_t frequency) {
-    phaseDriver->setFrequency(frequency);
+    LFOBase<fp_t>::setFrequency(frequency);
   }
 
   void setPhase(fp_t phase) {
-    phaseDriver->setPhase(phase);
+    LFOBase<fp_t>::setPhase(phase);
   }
 
   fp_t tick() {
-    out = phaseDriver->tick();
+    out = this->process();
     return out + out;
   }
 
  private:
   fp_t out;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 template <class fp_t>
-class Square {
+class Square : public LFOBase<fp_t> {
  public:
-  Square(fp_t sampleRate) {
-    phaseDriver = std::unique_ptr<LFOBase<fp_t>>(new LFOBase<fp_t>(sampleRate));
+  Square(fp_t sampleRate) : LFOBase<fp_t>(sampleRate) {
+    out = 0.0;
     pulseWidth = 0.5;
   }
   ~Square() {}
 
   void setFrequency(fp_t frequency) {
-    phaseDriver->setFrequency(frequency);
+    LFOBase<fp_t>::setFrequency(frequency);
   }
 
   void setPhase(fp_t phase) {
-    phaseDriver->setPhase(phase);
+    LFOBase<fp_t>::setPhase(phase);
   }
 
   void setPulseWidth(fp_t pw) {
@@ -175,7 +171,7 @@ class Square {
   }
 
   fp_t tick() {
-    out = phaseDriver->tick();
+    out = this->process();
     if (out > pulseWidth - 0.5) {
       return -1.0;
     }
@@ -185,10 +181,9 @@ class Square {
  private:
   fp_t out;
   fp_t pulseWidth;
-  std::unique_ptr<LFOBase<fp_t>> phaseDriver;
 };
 
 }; // !lfo
 }; // !snd
 
-#endif // !lfo_H_
+#endif // !LFO_H_

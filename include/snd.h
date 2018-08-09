@@ -126,7 +126,7 @@ class LFOBase {
 
   void setFrequency(fp_t frequency);
   void setPhase(fp_t phase);
-  fp_t tick();
+  fp_t process();
  private:
   fp_t SR;
   fp_t state;

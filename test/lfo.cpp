@@ -6,7 +6,7 @@ TEST(LFO, LFOBase) {
   ramp.setFrequency(440);
   double value = 0;
   for (int i = 0; i < 100; i++) {
-    value = ramp.tick();
+    value = ramp.process();
     EXPECT_LE(value, 0.5);
     EXPECT_GE(value, -0.5);
     switch (i) {
