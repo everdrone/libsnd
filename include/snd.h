@@ -274,7 +274,7 @@ class Sine {
 
  private:
   fp_t sample_rate, frequency;
-  fp_t phase, frequency_state, increment,
+  fp_t phase, frequency_state, frequency_input, increment,
        frequency_input, latency,
        sine_step, out;
 
@@ -295,7 +295,7 @@ class Sawtooth {
 
  private:
   fp_t sample_rate, phase, frequency,
-       frequency_state, increment;
+       frequency_state, frequency_input, increment;
   fp_t latency, out, phase_sign,
        snc, phase_state;
   FlipFlop flip_flop;
